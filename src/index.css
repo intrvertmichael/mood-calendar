@@ -1,0 +1,25 @@
+:root {
+  --border: rgb(236, 236, 236);
+}
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+}
+
+html, body {
+  font-family: Jetbrains Mono, helvetica, arial, sans-serif;
+  background: #f1e6d2;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+.title {
+  padding: 20px 0px;
+  font-size: 20px;
+  width: 100%;
+  border-bottom: 1px solid white;
+}

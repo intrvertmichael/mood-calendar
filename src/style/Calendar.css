@@ -1,0 +1,50 @@
+
+
+.calender-container {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px 0px;
+  background: white;
+  width: 100%;
+}
+
+
+
+.calender {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+}
+
+.month {
+  width: 100%;
+  text-align: center;
+  /* background: var(--border); */
+}
+
+.month h2 {
+  padding: 50px;
+  margin: 0px;
+  font-size: 30px;
+  font-weight: normal;
+}
+
+.day {
+  /* background: rgb(201, 214, 147); */
+  color: gray;
+  box-sizing: border-box;
+  width: 14.28%;
+  height: 125px;
+  display: block;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day:hover {
+  background: var(--border);
+}
