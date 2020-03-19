@@ -16,13 +16,14 @@
   flex-wrap: wrap;
   align-items: center;
   align-content: center;
+  justify-content: center;
   width: 100%;
+  margin: auto;
 }
 
 .month {
   width: 100%;
   text-align: center;
-  /* background: var(--border); */
 }
 
 .month h2 {
@@ -30,21 +31,4 @@
   margin: 0px;
   font-size: 30px;
   font-weight: normal;
-}
-
-.day {
-  /* background: rgb(201, 214, 147); */
-  color: gray;
-  box-sizing: border-box;
-  width: 14.28%;
-  height: 125px;
-  display: block;
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.day:hover {
-  background: var(--border);
 }

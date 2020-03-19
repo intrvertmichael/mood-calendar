@@ -1,5 +1,16 @@
 import React from 'react';
+
+import Day from './Day';
 import '../style/Calendar.css';
+import '../style/Day.css';
+
+
+var state = {
+  month: 'March',
+  length: 31,
+  startsOn: 1,
+}
+
 
 const Calendar = () => {
   return (
@@ -15,11 +26,15 @@ const Calendar = () => {
 }
 
 const days = () => {
-  var x = [];
-  for(var i=0;i<42;i++){
-    x.push(<div className='day' key={i}> {i+1} </div>);
+
+  var el = [];
+  var rows = state.startsOn > 4? 7*6 : 7*5;
+
+  for(var i=0;i<rows;i++){
+    el.push(<Day i={i} key={i}/>);
   }
-  return x;
+  return el;
 }
+
 
 export default Calendar;
