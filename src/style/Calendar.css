@@ -5,11 +5,9 @@
   border-radius: 10px;
   overflow: hidden;
   margin: 20px 0px;
-  background: white;
+  background: var(--calendar-background);
   width: 100%;
 }
-
-
 
 .calender {
   display: flex;

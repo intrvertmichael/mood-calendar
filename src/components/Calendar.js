@@ -1,8 +1,10 @@
 import React from 'react';
 
 import Day from './Day';
+
 import '../style/Calendar.css';
 import '../style/Day.css';
+import '../style/Moods.css';
 
 
 var state = {

@@ -10,7 +10,7 @@ var state = {
 export default (props) => {
   var calendarPosition = props.i;
   var dayOfMonth = calendarPosition - state.startsOn + 1;
-  var tags = 'day ';
+  var tags = '';
 
   tags += isThereAMood(dayOfMonth);
 
@@ -24,10 +24,10 @@ export default (props) => {
     (calendarPosition >= state.startsOn) &&
     (calendarPosition < (state.length + state.startsOn))
   ) {
-    day = <div className={tags} key={props.i}> {dayOfMonth} </div>;
+    day = <div className={`day ${tags}`} key={props.i}> {dayOfMonth} </div>;
   }
   else {
-    day = <div className={tags} key={props.i}>  </div>;
+    day = <div className={`notADay ${tags}`} key={props.i}>  </div>;
   }
   return day;
 }

@@ -1,0 +1,48 @@
+
+
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+MOOD 1 _ BAD
+ */
+.mood1 {
+  background: #617aec;
+  color: white;
+}
+.mood1:hover {
+  background: #5064c2;
+}
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+MOOD 2 _ NOT SO GOOD
+ */
+.mood2 {
+  background: #57a9dc;
+  color: white;
+}
+.mood2:hover {
+  background: #488bb5;
+}
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+MOOD 3 _ OKAY
+ */
+.mood3 {
+  background: #f09c39;
+  color: white;
+}
+
+.mood3:hover {
+  background: #c6802f;
+}
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+MOOD 4 _ GOOD
+ */
+.mood4 {
+  background: #f0c343;
+  color: white;
+}
+
+.mood4:hover {
+  background: #c6a137;
+}
