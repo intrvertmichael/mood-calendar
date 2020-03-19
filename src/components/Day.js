@@ -7,47 +7,54 @@ var state = {
 }
 
 
-
-
-const Day = (props) => {
+export default (props) => {
   var calendarPosition = props.i;
-  var dayOfMonth = calendarPosition-state.startsOn+1;
-  var mood = 'day ';
+  var dayOfMonth = calendarPosition - state.startsOn + 1;
+  var tags = 'day ';
 
+  tags += isThereAMood(dayOfMonth);
 
+  // LABEL TODAY ON CALENDAR
+  var currentDay = new Date().getDate();
+  calendarPosition === (currentDay + state.startsOn - 1)? tags += 'today' : tags += '';
 
-// MOODS
-  if(dayOfMonth===1){
-    mood += 'mood1 ';
-  }
-  else if(dayOfMonth===2){
-    mood += 'mood2 ';
-  }
-  else if(dayOfMonth===3){
-    mood += 'mood3 ';
-  }
-  else if(dayOfMonth===4){
-    mood += 'mood4 ';
+  // CREATE DAY JSX
+  var day;
+  if (
+    (calendarPosition >= state.startsOn) &&
+    (calendarPosition < (state.length + state.startsOn))
+  ) {
+    day = <div className={tags} key={props.i}> {dayOfMonth} </div>;
   }
   else {
-    mood += '';
+    day = <div className={tags} key={props.i}>  </div>;
   }
-
-
-
-  // FIND TODAY
-  var currentDay = new Date().getDate();
-  ( calendarPosition === currentDay + state.startsOn - 1 ) ? mood += 'today' : mood += '';
-
-  var x;
-
-  if( (calendarPosition >= state.startsOn) && (calendarPosition < (state.length+state.startsOn)) ){
-    x = <div className={mood} key={props.i}> {props.i - state.startsOn + 1} </div>;
-  } else {
-    x = <div className={mood} key={props.i}>  </div>;
-  }
-
-  return x;
+  return day;
 }
 
-export default Day;
+
+
+// HELPER FUNCTIONS
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+const isThereAMood = (dayOfMonth) => {
+  var color = ''
+
+  if(dayOfMonth===1){
+    color = 'mood1 ';
+  }
+  else if(dayOfMonth===2){
+    color = 'mood2 ';
+  }
+  else if(dayOfMonth===3){
+    color = 'mood3 ';
+  }
+  else if(dayOfMonth===4){
+    color = 'mood4 ';
+  }
+  else {
+    color = '';
+  }
+
+  return color
+}

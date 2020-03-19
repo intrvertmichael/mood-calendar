@@ -12,11 +12,11 @@ var state = {
 }
 
 
-const Calendar = () => {
+export default () => {
   return (
     <div className='calender-container'>
       <div className='month'>
-        <h2>March</h2>
+        <h2>{state.month}</h2>
       </div>
       <div className='calender'>
         {days()}
@@ -26,15 +26,11 @@ const Calendar = () => {
 }
 
 const days = () => {
-
-  var el = [];
+  var allDays = [];
   var rows = state.startsOn > 4? 7*6 : 7*5;
 
   for(var i=0;i<rows;i++){
-    el.push(<Day i={i} key={i}/>);
+    allDays.push(<Day i={i} key={i}/>);
   }
-  return el;
+  return allDays;
 }
-
-
-export default Calendar;

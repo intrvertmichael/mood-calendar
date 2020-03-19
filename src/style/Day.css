@@ -27,18 +27,22 @@
 
 /*
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+MOODS
+ */
+ 
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 MOOD 1 _ BAD
  */
 .mood1 {
   background: #617aec;
   color: white;
 }
-
 .mood1:hover {
   background: #5064c2;
 }
-
-
 /*
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 MOOD 2 _ NOT SO GOOD
@@ -47,13 +51,9 @@ MOOD 2 _ NOT SO GOOD
   background: #57a9dc;
   color: white;
 }
-
 .mood2:hover {
   background: #488bb5;
 }
-
-
-
 /*
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 MOOD 3 _ OKAY
@@ -66,7 +66,6 @@ MOOD 3 _ OKAY
 .mood3:hover {
   background: #c6802f;
 }
-
 /*
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 MOOD 4 _ GOOD
@@ -78,4 +77,18 @@ MOOD 4 _ GOOD
 
 .mood4:hover {
   background: #c6a137;
+}
+
+
+
+/*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+RESPONSIVE
+ */
+@media only screen and (max-width: 1400px) {
+  .day {
+    height: 120px;
+  }
 }
