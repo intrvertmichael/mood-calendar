@@ -30,14 +30,15 @@ export default (props) => {
         className={`day ${tags}`}
         key={calPosition}
         onClick={()=>{
-          let clicked = month.days[dayOfMonth-1];
-          if(clicked){
-            dispatch(setClickedDay(clicked));
-          } else {
-            dispatch(setClickedDay({day:dayOfMonth, mood:null}));
+          if(dayOfMonth <= today){
+            let clicked = month.days[dayOfMonth-1];
+            if(clicked){
+              dispatch(setClickedDay(clicked));
+            } else {
+              dispatch(setClickedDay({day:dayOfMonth, mood:null}));
+            }
+            dayClicked();
           }
-
-          dayClicked();
         }}> {dayOfMonth} </div>
       );
   }

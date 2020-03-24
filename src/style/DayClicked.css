@@ -18,7 +18,67 @@
 
 .dayInfo {
   width: 50%;
-  padding: 30px;
+  padding: 10px 20px;
   box-sizing: border-box;
   background: white;
+}
+
+.close {
+  float: right;
+  font-family: helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  color: rgb(200, 200, 200);
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--calendar-font);
+}
+
+.info-window {
+  margin-top:100px;
+  text-align: center;
+}
+
+.info-window p {
+  margin: 50px 0px;
+}
+
+.rating {
+  width: 80%;
+  margin: auto;
+  border-top:2px solid var(--border);
+  padding: 30px 0px;
+}
+
+.rating p {
+  display: block;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.rating-circles {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.circle-container {
+  width: 120px;
+  text-align: center;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 80px;
+  margin: auto;
+}
+
+.big-circle {
+  width: 300px;
+  height: 300px;
+  border-radius: 300px;
+  margin: 50px auto;
 }
