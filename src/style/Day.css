@@ -25,6 +25,7 @@
 
 .day:hover {
   background: var(--border);
+  cursor: pointer;
 }
 
 
@@ -36,11 +37,19 @@
 RESPONSIVE
  */
 @media only screen and (max-width: 1400px) {
-  .day {
+  .day, .notADay {
     height: 120px;
   }
+}
 
-  .notADay {
-    height: 120px;
+@media only screen and (min-width: 2000px) {
+  .day, .notADay {
+    height: 200px;
+  }
+}
+
+@media only screen and (min-width: 3000px) {
+  .day, .notADay {
+    height: 250px;
   }
 }
