@@ -3,49 +3,33 @@
 // REDUCER
 const initial = {
   num: 0,
-  clickedDay: {},
-  currentMonth: 0,
-  months: [
-    {
-      name:'March',
-      length:31,
-      starts:0,
-      days:[
-        {day:1, mood:2},
-        {day:2, mood:1},
-        {day:3, mood:4},
-        {day:4, mood:3},
-        {day:5, mood:4},
-        {day:6, mood:3},
-        {day:7, mood:2},
-        {day:8, mood:1},
-        {day:9, mood:4},
-        {day:10, mood:3},
-        {day:11, mood:2},
-        {day:12, mood:1},
-        {day:13, mood:4},
-        {day:14, mood:3},
-        {day:15, mood:2},
-        {day:16, mood:1},
-        {day:17, mood:4},
-        {day:18, mood:3},
-        {day:19, mood:2},
-        {day:20, mood:1},
-        {day:21, mood:2},
-        {day:22, mood:1}
-      ]
-    } ,
-    {
-      name:'April',
-      length:30,
-      starts:3,
-      days:[
-        {day:1, mood:2},
-        {day:2, mood:1},
-        {day:3, mood:4}
-      ]
+  clickedDay: 1,
+  clickedMood: 1,
+  currentMonth: 'march',
+  currentYear: '2020',
+  calendar: {
+    year2020:{
+      name:2020,
+      march:{
+        name:'March',
+        length:31,
+        starts:0,
+        days:[
+          {day:1, mood:2}
+        ]
+      } ,
+      april:{
+        name:'April',
+        length:30,
+        starts:3,
+        days:[
+          {day:1, mood:2},
+          {day:2, mood:1},
+          {day:3, mood:4}
+        ]
+      }
     }
-  ],
+  },
   profile: {
     name: 'Michael',
     dark: false
@@ -68,6 +52,23 @@ const reducer = ( state = initial, action) => {
       return state;
     case 'SET_CLICKED_DAY':
       return {...state, clickedDay:action.payload };
+    case 'SET_CLICKED_MOOD':
+      return {...state, clickedMood:action.payload };
+    case 'ADD_MOOD_DAY':
+      return {
+        ...state, //copy state
+        calendar: {
+          ...state.calendar, //copy months
+          year2020:{
+            ...state.calendar.year2020,
+            march: {
+              ...state.calendar.year2020.march, //copy single month
+              days:[...state.calendar.year2020.march.days, {day: action.day, mood: action.mood}]
+            }
+
+          }
+        }
+      }
     default:
       return state;
   }

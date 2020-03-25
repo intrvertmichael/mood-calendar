@@ -20,3 +20,17 @@ export const setClickedDay = (day) => {
     payload: day
   }
 }
+export const setClickedMood = (mood) => {
+  return {
+    type: 'SET_CLICKED_MOOD',
+    payload: mood
+  }
+}
+
+export const addMoodDay = (day, mood) => {
+  return {
+    type: 'ADD_MOOD_DAY',
+    day: day,
+    mood: mood
+  }
+}

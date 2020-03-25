@@ -12,7 +12,7 @@ import '../style/Moods.css';
 import {useSelector} from 'react-redux';
 
 export default () => {
-  const month = useSelector(state => state.months[state.currentMonth]);
+  const month = useSelector(state => state.calendar.year2020.march);
 
   return (
     <div className='calender-container'>

@@ -1,48 +1,39 @@
 import React from 'react';
 
 import {useSelector, useDispatch} from 'react-redux';
-import {increment} from '../_actions';
+import {addMoodDay} from '../_actions';
+import {setClickedMood} from '../_actions';
 
 const DayClicked = () => {
+  const month = useSelector(state => state.calendar.year2020.march);
+  const clickedMood = useSelector(state => state.clickedMood);
   const clickedDay = useSelector(state => state.clickedDay);
-  const currentMonthNum = useSelector(state => state.currentMonth);
-  const currentMonth = useSelector(state => state.months[currentMonthNum]);
+  const currentMonth = useSelector(state => state.currentMonth);
+
   const dispatch = useDispatch();
-  const mood = tellMood(clickedDay.mood);
+
+
+
   const today = new Date().getDate();
+  const isittoday = today === clickedDay ? true: false;
+  let doesithavemood = false;
+  let mood = '';
 
-  // calPosition === (today + startDay - 1)? tags += 'today ' : tags += '';
+  let bigface=``;
+  let bigfacemood=``;
 
-  const isittoday = today === clickedDay.day ? true: false;
-  const doesithavemood = clickedDay.mood !== null? true: false;
-
-  let infoMessage = '';
-  let ratingMessage = '';
-
-  if(doesithavemood && !isittoday){
-    infoMessage = `On ${currentMonth.name} ${clickedDay.day} you were feeling ${mood}` ;
-    ratingMessage = 'Did you change your mind ?';
-  }
-  else if(!doesithavemood && !isittoday) {
-    infoMessage = `You don't have a mood for ${currentMonth.name} ${clickedDay.day}` ;
-    ratingMessage = `How were you feeling? `;
-  }
-  else if(doesithavemood && isittoday){
-    infoMessage = `Seems like you're feeling ${mood} today` ;
-    ratingMessage = 'Did you change your mind ?';
-  }
-  else if(!doesithavemood && isittoday){
-    infoMessage = `Seems like you dont have a mood for today` ;
-    ratingMessage = 'Would you like to add one ?';
+  // HAS IT ALREADY BEEN GIVEN A MOOD ?
+  for(var i=0; i<month.days.length;i++){
+    if( month.days[i].day === clickedDay){
+      // IF IT HAS BEN GIVEN A MOOD
+      doesithavemood = true;
+      mood = tellMood(clickedMood);
+      bigface=`big-circle `;
+      bigfacemood = `mood${clickedMood}`
+    }
   }
 
-  let bigface='';
-
-  if (doesithavemood) {
-    bigface = `big-circle mood${clickedDay.mood}`;
-  } else {
-    bigface = 'other face';
-  }
+  let [infoMessage, ratingMessage] = getMessage(doesithavemood, isittoday, currentMonth, clickedDay, mood);
 
   return (
     <div className='dayClicked hide'>
@@ -51,17 +42,54 @@ const DayClicked = () => {
 
         <div className='info-window'>
           <p> {infoMessage} </p>
-          <div className={bigface}></div>
+          <div className={`${bigface} ${bigfacemood}`}></div>
 
         </div>
         <div className='rating'>
           <p> {ratingMessage}</p>
 
           <div className = 'rating-circles'>
-            <div className='circle-container'> <div className='circle mood1'></div> <p>Bad</p> </div>
-            <div className='circle-container'> <div className='circle mood2'></div> <p>Okay</p> </div>
-            <div className='circle-container'> <div className='circle mood3'></div> <p>Good</p> </div>
-            <div className='circle-container'> <div className='circle mood4'></div> <p>Really Good</p> </div>
+            <div className='circle-container'>
+              <div className='circle mood1'
+                onClick={()=>{
+                  dispatch(addMoodDay(clickedDay, 1));
+                  dispatch(setClickedMood(1));
+                }}>
+              </div>
+              <p>Bad</p>
+            </div>
+
+            <div className='circle-container'>
+              <div className='circle mood2'
+                onClick={()=>{
+                  dispatch(addMoodDay(clickedDay, 2));
+                  dispatch(setClickedMood(2));
+                }}>
+              </div>
+              <p>Okay</p>
+            </div>
+
+            <div className='circle-container'>
+              <div className='circle mood3'
+                onClick={()=>{
+                  dispatch(addMoodDay(clickedDay, 3));
+                  dispatch(setClickedMood(3));
+                }}>
+              </div>
+              <p>GOOD</p>
+            </div>
+
+            <div className='circle-container'>
+              <div className='circle mood4'
+                onClick={()=>{
+                  dispatch(addMoodDay(clickedDay, 4));
+                  dispatch(setClickedMood(4));
+                }}>
+              </div>
+              <p>REALLY GOOD</p>
+            </div>
+
+
           </div>
 
         </div>
@@ -71,9 +99,10 @@ const DayClicked = () => {
 }
 
 
-const removeWindow = () => {
-  document.querySelector('.dayClicked').classList.add('hide');
-}
+// HELPER FUNCTIONS
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+const removeWindow = () => document.querySelector('.dayClicked').classList.add('hide');
 
 const tellMood = (mood) => {
   if(mood === 1){
@@ -92,5 +121,35 @@ const tellMood = (mood) => {
     // return 'I have not put a feeling for this day.'
   }
 }
+
+const getMessage = (doesithavemood, isittoday, month, day, mood) => {
+  let infoMessage = '';
+  let ratingMessage = '';
+
+  if(doesithavemood && !isittoday){
+    infoMessage = `On ${month} ${day} you were feeling ${mood}` ;
+    ratingMessage = 'If not, how were you really feeling?';
+  }
+  else if(!doesithavemood && !isittoday) {
+    infoMessage = `You don't have a mood for ${month} ${day}` ;
+    ratingMessage = `How were you feeling? `;
+  }
+  else if(doesithavemood && isittoday){
+    infoMessage = `Seems like you're feeling ${mood} today` ;
+    ratingMessage = 'Did you change your mind ?';
+  }
+  else if(!doesithavemood && isittoday){
+    infoMessage = `Seems like you don't have a mood for today` ;
+    ratingMessage = 'Would you like to add one ?';
+  }
+  else {
+    infoMessage = '';
+    ratingMessage = '';
+  }
+  return [infoMessage, ratingMessage];
+}
+
+
+
 
 export default DayClicked;
