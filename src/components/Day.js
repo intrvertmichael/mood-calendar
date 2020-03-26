@@ -1,49 +1,40 @@
 import React from 'react';
 
 import {useDispatch} from 'react-redux';
-import {setClickedDay} from '../_actions';
-import {setClickedMood} from '../_actions';
+import {setClicked} from '../_actions';
 
 export default (props) => {
-  var calPosition = props.calendarPosition;
+  var cPos = props.calendarPosition;
   var dayOfMonth = props.dayOfMonth;
+  const today = props.today;
   const month = props.month;
-  var startDay = month.starts;
-  var monthLength = month.length;
+  var sDay = month.starts;
   var monthDays = month.days;
   var tags = '';
   const dispatch = useDispatch();
 
   // LABEL TODAY ON CALENDAR
-  var today = new Date().getDate();
-  calPosition === (today + startDay - 1)? tags += 'today ' : tags += '';
+  cPos === (today + sDay - 1)? tags += 'today ' : tags += '';
 
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // CREATE DAY JSX
-  if (
-    (calPosition >= startDay) &&
-    (calPosition < (monthLength + startDay) )
-  ){
+  if ((cPos>=sDay) && (cPos<(month.length + sDay))){
     let mood = isThereAMood(monthDays, dayOfMonth);
     tags+= `mood${mood}`;
     return (
       <div
         className={`day ${tags}`}
-        key={calPosition}
+        key={cPos}
         onClick={()=>{
           if(dayOfMonth <= today){
-            dispatch(setClickedDay(dayOfMonth));
-            dispatch(setClickedMood(mood));
+            dispatch(setClicked(dayOfMonth, mood));
             dayClicked();
           }
         }}> {dayOfMonth} </div>
       );
   }
   else {
-    return <div className={`notADay ${tags}`} key={calPosition}>  </div>;
+    return <div className={`notADay ${tags}`} key={cPos}>  </div>;
   }
-
 }
 
 
@@ -58,6 +49,7 @@ const isThereAMood = (days, dayOfMonth) => {
     }
   }
   return mood;
+
 }
 
 

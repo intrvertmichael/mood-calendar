@@ -12,7 +12,17 @@ import '../style/Moods.css';
 import {useSelector} from 'react-redux';
 
 export default () => {
-  const month = useSelector(state => state.calendar.year2020.march);
+
+  // GET DATE FROM BROWSER
+  const current_date = new Date();
+  const m = current_date.getMonth();
+  const y = current_date.getFullYear();
+  const d = current_date.getDate();
+
+  // REDUX
+  const calendar = useSelector(state => state.calendar);
+  const year = calendar[`year${y}`];
+  const month = year[`month${m}`];
 
   return (
     <div className='calender-container'>
@@ -23,15 +33,15 @@ export default () => {
       </div>
 
       <div className='calender'>
-        {days(month)}
+        {days(month, d)}
       </div>
 
-      <DayClicked />
+      <DayClicked month={month} today={d}/>
     </div>
   );
 }
 
-const days = (month) => {
+const days = (month, d) => {
   var allDays = [];
   var rows = (month.starts > 4 && month.length>29)? 7*6 : 7*5;
 
@@ -39,6 +49,7 @@ const days = (month) => {
     allDays.push(
       <Day
       key={i}
+      today={d}
       month={month}
       calendarPosition={i}
       dayOfMonth={i - month.starts + 1}/>

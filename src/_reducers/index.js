@@ -1,32 +1,31 @@
-
-
 // REDUCER
 const initial = {
-  num: 0,
-  clickedDay: 1,
-  clickedMood: 1,
-  currentMonth: 'march',
-  currentYear: '2020',
+  clicked: {
+    day: 1,
+    mood: 1
+  },
   calendar: {
     year2020:{
       name:2020,
-      march:{
-        name:'March',
-        length:31,
-        starts:0,
-        days:[
-          {day:1, mood:2}
-        ]
+      // MOOD 1 _ BAD
+      // MOOD 2 _ NOT SO GOOD
+      // MOOD 3 _ OKAY
+      // MOOD 4 _ GOOD
+      month2:{
+          name:'March',
+          length:31,
+          starts:0,
+          days:[]
       } ,
-      april:{
-        name:'April',
-        length:30,
-        starts:3,
-        days:[
-          {day:1, mood:2},
-          {day:2, mood:1},
-          {day:3, mood:4}
-        ]
+      month3:{
+          name:'April',
+          length:30,
+          starts:3,
+          days:[
+            {day:1, mood:2},
+            {day:2, mood:1},
+            {day:3, mood:4}
+          ]
       }
     }
   },
@@ -36,24 +35,13 @@ const initial = {
   }
 }
 
-// MOOD 1 _ BAD
-// MOOD 2 _ NOT SO GOOD
-// MOOD 3 _ OKAY
-// MOOD 4 _ GOOD
-
-
 const reducer = ( state = initial, action) => {
   switch(action.type) {
-    case 'INCREMENT':
-      state.num += action.payload;
-      return state;
-    case 'DECREMENT':
-      state.num -= 5;
-      return state;
-    case 'SET_CLICKED_DAY':
-      return {...state, clickedDay:action.payload };
-    case 'SET_CLICKED_MOOD':
-      return {...state, clickedMood:action.payload };
+    case 'SET_CLICKED':
+      return {
+        ...state,
+         clicked: {...state.clicked, day:action.day, mood:action.mood}
+         };
     case 'ADD_MOOD_DAY':
       return {
         ...state, //copy state
@@ -61,11 +49,10 @@ const reducer = ( state = initial, action) => {
           ...state.calendar, //copy months
           year2020:{
             ...state.calendar.year2020,
-            march: {
-              ...state.calendar.year2020.march, //copy single month
-              days:[...state.calendar.year2020.march.days, {day: action.day, mood: action.mood}]
+            month2: {
+              ...state.calendar.year2020.month2, //copy single month
+              days:[...state.calendar.year2020.month2.days, {day: action.day, mood: action.mood}]
             }
-
           }
         }
       }

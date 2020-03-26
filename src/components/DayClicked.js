@@ -2,38 +2,34 @@ import React from 'react';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {addMoodDay} from '../_actions';
-import {setClickedMood} from '../_actions';
+import {setClicked} from '../_actions';
 
-const DayClicked = () => {
-  const month = useSelector(state => state.calendar.year2020.march);
-  const clickedMood = useSelector(state => state.clickedMood);
-  const clickedDay = useSelector(state => state.clickedDay);
-  const currentMonth = useSelector(state => state.currentMonth);
+const DayClicked = (props) => {
+  const month = props.month;
+  const today = props.today;
 
+  const clickedMood = useSelector(state => state.clicked.mood);
+  const clickedDay = useSelector(state => state.clicked.day);
   const dispatch = useDispatch();
 
-
-
-  const today = new Date().getDate();
   const isittoday = today === clickedDay ? true: false;
   let doesithavemood = false;
-  let mood = '';
 
-  let bigface=``;
-  let bigfacemood=``;
+  let mood = '';
+  let bigfacetags=``;
 
   // HAS IT ALREADY BEEN GIVEN A MOOD ?
   for(var i=0; i<month.days.length;i++){
     if( month.days[i].day === clickedDay){
-      // IF IT HAS BEN GIVEN A MOOD
+      // IF SO
       doesithavemood = true;
       mood = tellMood(clickedMood);
-      bigface=`big-circle `;
-      bigfacemood = `mood${clickedMood}`
+      bigfacetags = `big-circle mood${clickedMood}`
     }
   }
 
-  let [infoMessage, ratingMessage] = getMessage(doesithavemood, isittoday, currentMonth, clickedDay, mood);
+  // CREATE MESSAGES
+  let [infoMessage, ratingMessage] = getMessage(doesithavemood, isittoday, month.name, clickedDay, mood);
 
   return (
     <div className='dayClicked hide'>
@@ -42,9 +38,9 @@ const DayClicked = () => {
 
         <div className='info-window'>
           <p> {infoMessage} </p>
-          <div className={`${bigface} ${bigfacemood}`}></div>
-
+          <div className={`${bigfacetags}`}></div>
         </div>
+
         <div className='rating'>
           <p> {ratingMessage}</p>
 
@@ -53,7 +49,7 @@ const DayClicked = () => {
               <div className='circle mood1'
                 onClick={()=>{
                   dispatch(addMoodDay(clickedDay, 1));
-                  dispatch(setClickedMood(1));
+                  dispatch(setClicked(clickedDay, 1));
                 }}>
               </div>
               <p>Bad</p>
@@ -63,7 +59,7 @@ const DayClicked = () => {
               <div className='circle mood2'
                 onClick={()=>{
                   dispatch(addMoodDay(clickedDay, 2));
-                  dispatch(setClickedMood(2));
+                  dispatch(setClicked(clickedDay, 2));
                 }}>
               </div>
               <p>Okay</p>
@@ -73,7 +69,7 @@ const DayClicked = () => {
               <div className='circle mood3'
                 onClick={()=>{
                   dispatch(addMoodDay(clickedDay, 3));
-                  dispatch(setClickedMood(3));
+                  dispatch(setClicked(clickedDay, 3));
                 }}>
               </div>
               <p>GOOD</p>
@@ -83,15 +79,13 @@ const DayClicked = () => {
               <div className='circle mood4'
                 onClick={()=>{
                   dispatch(addMoodDay(clickedDay, 4));
-                  dispatch(setClickedMood(4));
+                  dispatch(setClicked(clickedDay, 4));
                 }}>
               </div>
               <p>REALLY GOOD</p>
             </div>
 
-
           </div>
-
         </div>
       </div>
     </div>
@@ -100,7 +94,6 @@ const DayClicked = () => {
 
 
 // HELPER FUNCTIONS
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 const removeWindow = () => document.querySelector('.dayClicked').classList.add('hide');
 
@@ -146,10 +139,8 @@ const getMessage = (doesithavemood, isittoday, month, day, mood) => {
     infoMessage = '';
     ratingMessage = '';
   }
+
   return [infoMessage, ratingMessage];
 }
-
-
-
 
 export default DayClicked;

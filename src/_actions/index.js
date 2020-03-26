@@ -1,29 +1,11 @@
 
 
 // ACTIONS
-export const increment = (num) => {
+export const setClicked = (day, mood) => {
   return {
-    type: 'INCREMENT',
-    payload: num
-  }
-}
-
-export const decrement = () => {
-  return {
-    type: 'DECREMENT'
-  }
-}
-
-export const setClickedDay = (day) => {
-  return {
-    type: 'SET_CLICKED_DAY',
-    payload: day
-  }
-}
-export const setClickedMood = (mood) => {
-  return {
-    type: 'SET_CLICKED_MOOD',
-    payload: mood
+    type: 'SET_CLICKED',
+    day: day,
+    mood: mood
   }
 }
 
