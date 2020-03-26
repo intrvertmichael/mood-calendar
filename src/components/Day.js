@@ -25,7 +25,10 @@ export default (props) => {
         className={`day ${tags}`}
         key={cPos}
         onClick={()=>{
-          if(dayOfMonth <= today){
+          // checks if today or yesterday
+          // if(dayOfMonth <= today && (dayOfMonth === today || dayOfMonth === today-1))
+          if(dayOfMonth <= today)
+          {
             dispatch(setClicked(dayOfMonth, mood));
             dayClicked();
           }

@@ -9,6 +9,14 @@ export const setClicked = (day, mood) => {
   }
 }
 
+export const setCalendar = (month, year) => {
+  return {
+    type: 'SET_CALENDER',
+    month: month,
+    year: year
+  }
+}
+
 export const addMoodDay = (day, mood) => {
   return {
     type: 'ADD_MOOD_DAY',
