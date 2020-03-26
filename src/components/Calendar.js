@@ -44,6 +44,7 @@ export default () => {
   // ALL MONTHS AND YEARS
   // const allYears = Object.entries(calendar);
   const allMonths = Object.entries(year);
+  // console.log(allMonths);
   // console.log(allYears.length);
 
   return (
@@ -53,14 +54,26 @@ export default () => {
       <div className='month'>
         <h2>
         {
-          // allMonths.length > 4 ?
+          // allMonths.length > 100 ?
           allMonths.length > 2 ?
-          <p className='more' onClick={()=>{
-            moreMonths(allMonths);
-            dispatch(setCalendar(3,y));
+          <select className="months" defaultValue={'DEFAULT'} onChange={()=>{
+            var selected = document.querySelector('.months');
+            dispatch(setCalendar(selected.value,y));
           }}>
-            {month.name}
-          </p> :
+            {allMonths.map(month => {
+              if(month[1].num>=0 && month[1].num!== m ){
+                return <option key={month[1].num} value={month[1].num}>{month[1].name}</option>;
+              }
+              else if(month[1].num=== m){
+                return <option key={month[1].num} value='DEFAULT'>{month[1].name}</option>;
+              }
+              else {
+                return '';
+              }
+            })
+          }
+          </select>
+          :
           <p>{month.name}</p>
         }
         </h2>
@@ -73,12 +86,6 @@ export default () => {
       <DayClicked month={month} today={d}/>
     </div>
   );
-}
-
-const moreMonths = (allMonths) =>{
-  console.log('allMonths');
-  console.log(allMonths);
-  console.log(allMonths.length);
 }
 
 const days = (month, d) => {

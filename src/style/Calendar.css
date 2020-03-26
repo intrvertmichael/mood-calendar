@@ -54,3 +54,13 @@
 .more:hover {
   color: gray;
 }
+
+/* DROPDOWN */
+select {
+  font-family: Jetbrains Mono, helvetica, arial, sans-serif;
+  font-size: 30px;
+  background: white;
+  border: none;
+  margin: 30px;
+  padding: 100px;
+}

@@ -18,24 +18,28 @@ const initial = {
       // MOOD 3 _ OKAY
       // MOOD 4 _ GOOD
       month0:{
+          num:0,
           name:'January',
           length:31,
           starts:4,
           days:[]
       } ,
       month1:{
+          num:1,
           name:'February',
           length:28,
           starts:6,
           days:[]
       } ,
       month2:{
+          num:2,
           name:'March',
           length:31,
           starts:0,
           days:[]
       } ,
       month3:{
+          num:3,
           name:'April',
           length:30,
           starts:3,
@@ -54,12 +58,14 @@ const initial = {
       // MOOD 3 _ OKAY
       // MOOD 4 _ GOOD
       month2:{
+          num:2,
           name:'March',
           length:31,
           starts:0,
           days:[]
       } ,
       month3:{
+          num:3,
           name:'April',
           length:30,
           starts:3,
