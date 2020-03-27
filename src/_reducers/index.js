@@ -12,7 +12,7 @@ const initial = {
   },
   calendar: {
     year2020:{
-      month0:{ num:0, name:'January', length:31, starts:3, days:[{day:1, mood:1}, {day:2, mood:2}, {day:3, mood:3}, {day:4, mood:4}] }
+      // month0:{ num:0, name:'January', length:31, starts:3, days:[{day:1, mood:1}, {day:2, mood:2}, {day:3, mood:3}, {day:4, mood:4}] }
       // , month2:{ num:2, name:'March', length:31, starts:0, days:[{day:1, mood:1}] }
     }
   }
