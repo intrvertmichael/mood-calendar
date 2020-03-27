@@ -106,9 +106,13 @@ const reducer = ( state = initial, action) => {
           ...state.calendar, //copy months
           year2020:{
             ...state.calendar.year2020,
-            month2: {
-              ...state.calendar.year2020.month2, //copy single month
-              days:[...state.calendar.year2020.month2.days, {day: action.day, mood: action.mood}]
+            [`month${action.month}`] : {
+              ...state.calendar.year2020[`month${action.month}`],
+                days:
+                  [
+                    ...state.calendar.year2020[`month${action.month}`].days,
+                    {day: action.day, mood: action.mood}
+                  ]
             }
           }
         }

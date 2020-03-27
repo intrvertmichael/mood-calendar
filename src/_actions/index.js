@@ -1,5 +1,4 @@
 
-
 // ACTIONS
 export const setClicked = (day, mood) => {
   return {
@@ -17,9 +16,10 @@ export const setCalendar = (month, year) => {
   }
 }
 
-export const addMoodDay = (day, mood) => {
+export const addMoodDay = (month, day, mood) => {
   return {
     type: 'ADD_MOOD_DAY',
+    month: month,
     day: day,
     mood: mood
   }

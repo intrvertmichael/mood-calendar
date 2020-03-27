@@ -48,7 +48,7 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood1'
                 onClick={()=>{
-                  dispatch(addMoodDay(clickedDay, 1));
+                  dispatch(addMoodDay(month.num, clickedDay, 1));
                   dispatch(setClicked(clickedDay, 1));
                 }}>
               </div>
@@ -58,7 +58,7 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood2'
                 onClick={()=>{
-                  dispatch(addMoodDay(clickedDay, 2));
+                  dispatch(addMoodDay(month.num, clickedDay, 2));
                   dispatch(setClicked(clickedDay, 2));
                 }}>
               </div>
@@ -68,7 +68,7 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood3'
                 onClick={()=>{
-                  dispatch(addMoodDay(clickedDay, 3));
+                  dispatch(addMoodDay(month.num, clickedDay, 3));
                   dispatch(setClicked(clickedDay, 3));
                 }}>
               </div>
@@ -78,7 +78,7 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood4'
                 onClick={()=>{
-                  dispatch(addMoodDay(clickedDay, 4));
+                  dispatch(addMoodDay(month.num, clickedDay, 4));
                   dispatch(setClicked(clickedDay, 4));
                 }}>
               </div>

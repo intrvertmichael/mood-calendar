@@ -41,11 +41,7 @@ export default () => {
   const year = calendar[`year${y}`];
   const month = year[`month${m}`];
 
-  // ALL MONTHS AND YEARS
-  // const allYears = Object.entries(calendar);
   const allMonths = Object.entries(year);
-  // console.log(allMonths);
-  // console.log(allYears.length);
 
   return (
     <div className='calender-container'>
