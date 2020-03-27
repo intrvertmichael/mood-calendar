@@ -18,7 +18,6 @@
 
 .dayInfo {
   width: 50%;
-  padding: 25px 30px;
   box-sizing: border-box;
   background-color: #dcd7d0;
   background-image: linear-gradient(0deg, #dcd7d0 0%, #ffffff 100%);
@@ -26,26 +25,13 @@
   border-radius: 20px;
 }
 
-.close {
-  float: right;
-  font-family: helvetica, sans-serif;
-  font-weight: bold;
-  font-size: 30px;
-  color: rgb(210, 210, 210);
-  cursor: pointer;
-}
-
-.close:hover {
-  color: var(--border);
-}
-
 .info-window {
-  margin-top:100px;
+  margin-top:40px;
   text-align: center;
 }
 
 .info-window p {
-  padding: 20px 40px;
+  padding: 20px;
   font-size: 20px;
 }
 
@@ -57,7 +43,6 @@
 }
 
 .rating p {
-  display: block;
   padding-bottom: 20px;
   text-align: center;
 }

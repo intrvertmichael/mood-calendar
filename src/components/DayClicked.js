@@ -12,6 +12,14 @@ const DayClicked = (props) => {
   const clickedDay = useSelector(state => state.clicked.day);
   const dispatch = useDispatch();
 
+  // CLOSE BOX WHEN CLICKED OUT
+  var modal = document.querySelector('.dayClicked');
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      modal.classList.add('hide');
+    }
+  }
+
   const isittoday = today === clickedDay ? true: false;
   let doesithavemood = false;
 
@@ -34,8 +42,6 @@ const DayClicked = (props) => {
   return (
     <div className='dayClicked hide'>
       <div className='dayInfo'>
-        <span className='close' onClick={removeWindow}>X</span>
-
         <div className='info-window'>
           <p> {infoMessage} </p>
           <div className={`${bigfacetags}`}></div>
@@ -94,9 +100,6 @@ const DayClicked = (props) => {
 
 
 // HELPER FUNCTIONS
-
-const removeWindow = () => document.querySelector('.dayClicked').classList.add('hide');
-
 const tellMood = (mood) => {
   if(mood === 1){
     return('BAD');

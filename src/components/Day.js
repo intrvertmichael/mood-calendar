@@ -14,7 +14,9 @@ export default (props) => {
   const dispatch = useDispatch();
 
   // LABEL TODAY ON CALENDAR
-  if(month.num === new Date().getMonth()){
+  var thisMonth = new Date().getMonth();
+  var isitthismonth = month.num === thisMonth ? true : false;
+  if(isitthismonth){
     cPos === (today + sDay - 1)? tags += 'today ' : tags += '';
   }
 
@@ -27,7 +29,7 @@ export default (props) => {
         className={`day ${tags}`}
         key={cPos}
         onClick={()=>{
-          if(dayOfMonth <= today)
+          if(dayOfMonth <= today || !isitthismonth)
           {
             dispatch(setClicked(dayOfMonth, mood));
             dayClicked();
