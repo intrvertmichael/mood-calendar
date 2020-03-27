@@ -16,10 +16,9 @@ export const setCalendar = (month, year) => {
   }
 }
 
-export const addMoodDay = (month, day, mood) => {
+export const addMoodDay = (day, mood) => {
   return {
     type: 'ADD_MOOD_DAY',
-    month: month,
     day: day,
     mood: mood
   }

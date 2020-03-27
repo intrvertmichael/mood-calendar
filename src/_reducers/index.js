@@ -5,10 +5,10 @@ const initial = {
     dark: false
   },
   clicked: {
-    day: 1,
-    mood: 1,
+    year: 0,
     month: 0,
-    year: 0
+    day: 1,
+    mood: 1
   },
   calendar: {
     year2020:{
@@ -22,21 +22,27 @@ const initial = {
           name:'January',
           length:31,
           starts:4,
-          days:[]
+          days:[
+            {day:1, mood:2}
+          ]
       } ,
       month1:{
           num:1,
           name:'February',
           length:28,
           starts:6,
-          days:[]
+          days:[
+            {day:2, mood:1}
+          ]
       } ,
       month2:{
           num:2,
           name:'March',
           length:31,
           starts:0,
-          days:[]
+          days:[
+            {day:3, mood:4}
+          ]
       } ,
       month3:{
           num:3,
@@ -44,9 +50,6 @@ const initial = {
           length:30,
           starts:3,
           days:[
-            {day:1, mood:2},
-            {day:2, mood:1},
-            {day:3, mood:4},
             {day:4, mood:3}
           ]
       }
@@ -104,13 +107,13 @@ const reducer = ( state = initial, action) => {
         ...state, //copy state
         calendar: {
           ...state.calendar, //copy months
-          year2020:{
-            ...state.calendar.year2020,
-            [`month${action.month}`] : {
-              ...state.calendar.year2020[`month${action.month}`],
+          [`year${state.clicked.year}`]:{
+            ...state.calendar[`year${state.clicked.year}`],
+            [`month${state.clicked.month}`] : {
+              ...state.calendar[`year${state.clicked.year}`][`month${state.clicked.month}`],
                 days:
                   [
-                    ...state.calendar.year2020[`month${action.month}`].days,
+                    ...state.calendar[`year${state.clicked.year}`][`month${state.clicked.month}`].days,
                     {day: action.day, mood: action.mood}
                   ]
             }
