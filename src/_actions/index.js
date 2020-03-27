@@ -23,3 +23,11 @@ export const addMoodDay = (day, mood) => {
     mood: mood
   }
 }
+
+export const addMonth = (name, month) => {
+  return {
+    type: 'ADD_MONTH',
+    name:name,
+    month:month
+  }
+}

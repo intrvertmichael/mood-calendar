@@ -11,28 +11,50 @@ import '../style/Moods.css';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {setCalendar} from '../_actions';
+import {addMonth} from '../_actions';
 
 export default () => {
   const dispatch = useDispatch();
-  const clickedMonth = useSelector(state => state.clicked.month);
+  const calendarYear = useSelector(state => state.calendar.year2020);
   const clickedYear = useSelector(state => state.clicked.year);
+  const clickedMonth = useSelector(state => state.clicked.month);
+
+
+  const default_2020 = [
+    { num:0,  name:'January',   length:31, starts:3, days:[] } ,
+    { num:1,  name:'February',  length:28, starts:6, days:[] } ,
+    { num:2,  name:'March',     length:31, starts:0, days:[] } ,
+    { num:3,  name:'April',     length:30, starts:3, days:[] } ,
+    { num:4,  name:'May',       length:31, starts:5, days:[] } ,
+    { num:5,  name:'June',      length:30, starts:1, days:[] } ,
+    { num:6,  name:'July',      length:31, starts:3, days:[] } ,
+    { num:7,  name:'August',    length:31, starts:6, days:[] } ,
+    { num:8,  name:'September', length:30, starts:2, days:[] } ,
+    { num:9,  name:'October',   length:31, starts:4, days:[] } ,
+    { num:10, name:'November',  length:30, starts:0, days:[] } ,
+    { num:11, name:'December',  length:31, starts:2, days:[] }
+  ]
+
 
   const current_date = new Date();
   const d = current_date.getDate();
   let m;
   let y;
 
-  if(clickedMonth===0){
-    // IF THERE IS NO CLICKED MONTH
+  if(!clickedMonth){
+    // FIRST TIME THE APP RUNS
     m = current_date.getMonth();
     y = current_date.getFullYear();
+    if(!calendarYear[`month${m}`]){
+      console.log('The current month does not exist');
+      console.log('We will create it');
+      dispatch(addMonth(`month${m}`, default_2020[m]));
+    }
     dispatch(setCalendar(m,y));
-    console.log(`setting to current month and year ${m}/${y}`);
   } else {
-    // IF THERE IS A CLICKED MONTH
     m = clickedMonth;
     y = clickedYear;
-    console.log(`month ${m} year ${y}`);
+    console.log(`Month exists in Calendar: month ${m} ${y}`);
   }
 
 
@@ -50,8 +72,7 @@ export default () => {
       <div className='month'>
         <h2>
         {
-          // allMonths.length > 100 ?
-          allMonths.length > 2 ?
+          allMonths.length > 1 ?
           <select className="months" defaultValue={'DEFAULT'} onChange={()=>{
             var selected = document.querySelector('.months');
             dispatch(setCalendar(selected.value,y));

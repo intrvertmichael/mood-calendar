@@ -14,7 +14,9 @@ export default (props) => {
   const dispatch = useDispatch();
 
   // LABEL TODAY ON CALENDAR
-  cPos === (today + sDay - 1)? tags += 'today ' : tags += '';
+  if(month.num === new Date().getMonth()){
+    cPos === (today + sDay - 1)? tags += 'today ' : tags += '';
+  }
 
   // CREATE DAY JSX
   if ((cPos>=sDay) && (cPos<(month.length + sDay))){
@@ -25,8 +27,6 @@ export default (props) => {
         className={`day ${tags}`}
         key={cPos}
         onClick={()=>{
-          // checks if today or yesterday
-          // if(dayOfMonth <= today && (dayOfMonth === today || dayOfMonth === today-1))
           if(dayOfMonth <= today)
           {
             dispatch(setClicked(dayOfMonth, mood));
@@ -40,23 +40,19 @@ export default (props) => {
   }
 }
 
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // CHECK DAY AND COLOR CALENDAR IF THERE IS A MOOD
-
 const isThereAMood = (days, dayOfMonth) => {
-  var mood = ''
+  var mood;
   for(var i=0; i<days.length;i++){
-    if( days[i].day === dayOfMonth){
+    if(days[i].day === dayOfMonth){
       mood = days[i].mood;
     }
   }
   return mood;
-
 }
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // WHEN A DAY IS CLICKED
-
 const dayClicked = () => document.querySelector('.dayClicked').classList.remove('hide');
