@@ -13,6 +13,7 @@
   height: 150px;
   display: block;
   border: 1px solid var(--border);
+  transition: height 0.5s ease;
 }
 
 .day {
@@ -36,20 +37,34 @@
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 RESPONSIVE
  */
-@media only screen and (max-width: 1400px) {
+
+@media only screen and ( min-width: 1500px ) {
   .day, .notADay {
-    height: 120px;
+    height: 150px;
   }
 }
 
-@media only screen and (min-width: 2000px) {
+@media only screen and ( 1250px <= width < 1500px) {
   .day, .notADay {
-    height: 200px;
+    height: 125px;
   }
 }
 
-@media only screen and (min-width: 3000px) {
+@media only screen and ( 1000px <= width < 1250px) {
   .day, .notADay {
-    height: 250px;
+    height: 100px;
+  }
+}
+
+@media only screen and ( 500px <= width <= 1000px) {
+  .day, .notADay {
+    height: 80px;
+  }
+}
+
+/* IPHONE */
+@media only screen and ( max-width: 500px) {
+  .day, .notADay {
+    height: 60px;
   }
 }
