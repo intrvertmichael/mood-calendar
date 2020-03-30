@@ -13,11 +13,8 @@ const DayClicked = (props) => {
   const dispatch = useDispatch();
 
   // CLOSE BOX WHEN CLICKED OUT
-  var modal = document.querySelector('.dayClicked');
   window.onclick = function(event) {
-    if (event.target === modal) {
-      modal.classList.add('hide');
-    }
+    if (event.target === document.querySelector('.dayClicked')) { closeWindow() }
   }
 
   const isittoday = today === clickedDay ? true: false;
@@ -42,6 +39,7 @@ const DayClicked = (props) => {
   return (
     <div className='dayClicked hide'>
       <div className='dayInfo'>
+        <span className='close' onClick={closeWindow}> x </span>
         <div className='info-window'>
           <p> {infoMessage} </p>
           <div className={`${bigfacetags}`}></div>
@@ -56,6 +54,7 @@ const DayClicked = (props) => {
                 onClick={()=>{
                   dispatch(addMoodDay(clickedDay, 1));
                   dispatch(setClicked(clickedDay, 1));
+                  closeWindow();
                 }}>
               </div>
               <p>Bad</p>
@@ -66,6 +65,7 @@ const DayClicked = (props) => {
                 onClick={()=>{
                   dispatch(addMoodDay(clickedDay, 2));
                   dispatch(setClicked(clickedDay, 2));
+                  closeWindow();
                 }}>
               </div>
               <p>Okay</p>
@@ -76,6 +76,7 @@ const DayClicked = (props) => {
                 onClick={()=>{
                   dispatch(addMoodDay(clickedDay, 3));
                   dispatch(setClicked(clickedDay, 3));
+                  closeWindow();
                 }}>
               </div>
               <p>GOOD</p>
@@ -86,6 +87,7 @@ const DayClicked = (props) => {
                 onClick={()=>{
                   dispatch(addMoodDay(clickedDay, 4));
                   dispatch(setClicked(clickedDay, 4));
+                  closeWindow();
                 }}>
               </div>
               <p>REALLY GOOD</p>
@@ -100,6 +102,11 @@ const DayClicked = (props) => {
 
 
 // HELPER FUNCTIONS
+const closeWindow =() => {
+  var modal = document.querySelector('.dayClicked');
+  modal.classList.add('hide');
+}
+
 const tellMood = (mood) => {
   if(mood === 1){
     return('BAD');
