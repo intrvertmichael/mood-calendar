@@ -30,6 +30,20 @@
 }
 
 
+.weekday {
+  box-sizing: border-box;
+  width: 14.28%;
+  height: 40px;
+  font-size: 13px;
+  display: block;
+  background: rgb(250, 250, 250);
+  border: 1px solid var(--border);
+  color: var(--calendar-font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 /*
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

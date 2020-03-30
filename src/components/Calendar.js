@@ -109,6 +109,12 @@ const days = (month, d) => {
   var allDays = [];
   var rows = (month.starts > 4 && month.length>29)? 7*6 : 7*5;
 
+  const weekday = ['S', 'M', 'T', 'W', 'Th', 'F', 'S'];
+
+  for(var x=0;x<=6;x++){
+    allDays.push(<div key={`day${x}`} className='weekday'> {weekday[x]} </div>);
+  }
+
   for(var i=0;i<rows;i++){
     allDays.push(
       <Day
