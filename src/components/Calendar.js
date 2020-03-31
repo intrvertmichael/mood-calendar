@@ -15,9 +15,12 @@ import {addMonth} from '../_actions';
 
 export default () => {
   const dispatch = useDispatch();
-  const calendarYear = useSelector(state => state.calendar.year2020);
-  const clickedYear = useSelector(state => state.clicked.year);
-  const clickedMonth = useSelector(state => state.clicked.month);
+  const seefull = useSelector(state => state);
+  console.log(seefull);
+
+  const calendarYear = useSelector(state => state.calendar.calendar.year2020);
+  const clickedYear = useSelector(state => state.calendar.clicked.year);
+  const clickedMonth = useSelector(state => state.calendar.clicked.month);
 
 
   const default_2020 = [
@@ -59,7 +62,7 @@ export default () => {
 
 
   // REDUX
-  const calendar = useSelector(state => state.calendar);
+  const calendar = useSelector(state => state.calendar.calendar);
   const year = calendar[`year${y}`];
   const month = year[`month${m}`];
 

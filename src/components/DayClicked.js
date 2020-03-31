@@ -8,8 +8,8 @@ const DayClicked = (props) => {
   const month = props.month;
   const today = props.today;
 
-  const clickedMood = useSelector(state => state.clicked.mood);
-  const clickedDay = useSelector(state => state.clicked.day);
+  const clickedMood = useSelector(state => state.calendar.clicked.mood);
+  const clickedDay = useSelector(state => state.calendar.clicked.day);
   const dispatch = useDispatch();
 
   // CLOSE BOX WHEN CLICKED OUT

@@ -3,7 +3,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 
 const Header = (props) => {
-  const profile = useSelector(state => state.profile);
+  const profile = useSelector(state => state.calendar.profile);
   const name = profile.name;
 
   return(
