@@ -31,3 +31,21 @@ export const addMonth = (name, month) => {
     month:month
   }
 }
+
+export const createProject = (project) => {
+  return (dispatch, getState, {getFirebase, getFirestore}) => {
+    const firestore = getFirestore();
+    firestore.collection('projects').add({
+      ...project,
+      authorFirst: 'Net',
+      authorLast: 'Ninja',
+      createdAt: new Date()
+    }).then(()=>{
+      console.log('firestore:');
+      console.log(firestore);
+      dispatch({type: 'CREATE_PROJECT', project})
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+}

@@ -13,15 +13,23 @@ import {useSelector, useDispatch} from 'react-redux';
 import {setCalendar} from '../_actions';
 import {addMonth} from '../_actions';
 
+import { useFirestoreConnect } from 'react-redux-firebase';
+
 export default () => {
   const dispatch = useDispatch();
   const seefull = useSelector(state => state);
   console.log(seefull);
 
+  useFirestoreConnect([
+   { collection: 'projects' } // or 'todos'
+ ])
+ const projects = useSelector(state => state.firestore.ordered.projects);
+ console.log('projects');
+ console.log(projects);
+
   const calendarYear = useSelector(state => state.calendar.calendar.year2020);
   const clickedYear = useSelector(state => state.calendar.clicked.year);
   const clickedMonth = useSelector(state => state.calendar.clicked.month);
-
 
   const default_2020 = [
     { num:0,  name:'January',   length:31, starts:3, days:[] } ,
@@ -49,15 +57,14 @@ export default () => {
     m = current_date.getMonth();
     y = current_date.getFullYear();
     if(!calendarYear[`month${m}`]){
-      console.log('The current month does not exist');
-      console.log('We will create it');
+      console.log('The current month does not exist... We will create it');
       dispatch(addMonth(`month${m}`, default_2020[m]));
     }
     dispatch(setCalendar(m,y));
   } else {
     m = clickedMonth;
     y = clickedYear;
-    console.log(`Month exists in Calendar: month ${m} ${y}`);
+    console.log(`Month exists in Calendar... Month: ${m} Year: ${y}`);
   }
 
 

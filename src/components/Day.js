@@ -2,6 +2,7 @@ import React from 'react';
 
 import {useDispatch} from 'react-redux';
 import {setClicked} from '../_actions';
+import {createProject} from '../_actions';
 
 export default (props) => {
   var cPos = props.calendarPosition;
@@ -32,6 +33,8 @@ export default (props) => {
           if(dayOfMonth <= today || !isitthismonth)
           {
             dispatch(setClicked(dayOfMonth, mood));
+            dispatch(createProject({name:'mario',game:'super mario'}));
+
             dayClicked();
           }
         }}> {dayOfMonth} </div>

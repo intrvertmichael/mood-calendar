@@ -67,6 +67,9 @@ const calendarReducer = ( state = initial, action) => {
           }
         }
       }
+    case 'CREATE_PROJECT':
+      console.log('project was created.')
+      return state;
     default:
       return state;
   }
