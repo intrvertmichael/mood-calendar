@@ -17,15 +17,11 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 
 export default () => {
   const dispatch = useDispatch();
-  const seefull = useSelector(state => state);
-  console.log(seefull);
 
-  useFirestoreConnect([
-   { collection: 'projects' } // or 'todos'
- ])
- const projects = useSelector(state => state.firestore.ordered.projects);
- console.log('projects');
- console.log(projects);
+  useFirestoreConnect([ { collection: 'projects' } ])
+  const projects = useSelector(state => state.firestore.ordered.projects);
+  console.log('Projects:');
+  console.log(projects);
 
   const calendarYear = useSelector(state => state.calendar.calendar.year2020);
   const clickedYear = useSelector(state => state.calendar.clicked.year);

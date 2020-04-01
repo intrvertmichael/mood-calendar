@@ -4,52 +4,31 @@ import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
-
 // REDUX
 import {Provider} from 'react-redux';
 import {createStore, compose, applyMiddleware} from 'redux';
 import reducer from './_reducers';
 
 // FIREBASE
-import thunk from 'redux-thunk';
-import fb from './firebase';
-import firebase from 'firebase/app'
-import 'firebase/firestore';
-// import {ReactReduxFirebaseProvider, getFirebase} from 'react-redux-firebase';
-// import {reduxFirestore, createFirestoreInstance} from 'redux-firestore';
-
 import {reduxFirestore, getFirestore, createFirestoreInstance} from 'redux-firestore';
 import {ReactReduxFirebaseProvider, getFirebase} from 'react-redux-firebase';
+import firebase from 'firebase/app'
+import 'firebase/firestore';
+import fb from './firebase';
 
-// REDUX
-const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose: compose;
+import thunk from 'redux-thunk';
+
 
 // STORE
-// const store = createStore(reducer, composeEnhancers(
-//   // ReactReduxFirebase(firebase, rrfConfig),
-//   applyMiddleware(thunk.withExtraArgument({getFirebase}))
-// ));
-
-const rrfConfig = {
-  userProfile: 'users',
-  useFirestoreForProfile: true
-}
-
-// Add reduxFirestore store enhancer to store creator
-// const createStoreWithFirebase = compose(
-//   reduxFirestore(firebase, rrfConfig), // firebase instance as first argument, rfConfig as optional second
-// )(createStore);
-
-// Create store with reducers and initial state
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,
-  compose(
+  composeEnhancers(
     applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
     reduxFirestore(firebase, fb)
   )
 );
 
-// FIREBASE
-
+// REACT REDUX FIREBASE OPTIONS
 const rrfProps = {
   firebase,
   config: fb,
