@@ -33,8 +33,9 @@ export const addMonth = (name, month) => {
 }
 
 export const createProject = (project) => {
-  return (dispatch, getState, {getFirebase, getFirestore}) => {
+  return (dispatch, getState, {getFirestore}) => {
     const firestore = getFirestore();
+
     firestore.collection('projects').add({
       ...project,
       authorFirst: 'Net',
@@ -46,6 +47,31 @@ export const createProject = (project) => {
       dispatch({type: 'CREATE_PROJECT', project})
     }).catch((err)=>{
       console.log(err)
+    })
+  }
+}
+
+export const logIn = () => {
+  return(dispatch, getState, {getFirebase})=>{
+    const firebase = getFirebase();
+    firebase.login({
+      provider: 'google',
+      type: 'popup'
+      // scopes: ['email'] // not required
+    }).then((e)=>{
+      console.log('logged in`');
+      console.log(e);
+    }).catch(()=>{
+      console.log('log in failed');
+    })
+  }
+}
+
+export const logOut = () =>{
+  return(dispatch, getState, {getFirebase})=>{
+    const firebase = getFirebase();
+    firebase.auth().signOut().then(()=>{
+      console.log('signed out');
     })
   }
 }

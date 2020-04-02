@@ -34,6 +34,7 @@ export default (props) => {
           {
             dispatch(setClicked(dayOfMonth, mood));
             dispatch(createProject({name:'mario',game:'super mario'}));
+            // dispatch(logIn());
 
             dayClicked();
           }

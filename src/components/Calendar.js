@@ -18,7 +18,12 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 export default () => {
   const dispatch = useDispatch();
 
-  useFirestoreConnect([ { collection: 'projects' } ])
+  const s = useSelector(state => state);
+  console.log('State:');
+  console.log(s);
+
+  // SYNCS THE REDUCER WITH FIREBASE
+  useFirestoreConnect([ { collection: 'projects' } ]);
   const projects = useSelector(state => state.firestore.ordered.projects);
   console.log('Projects:');
   console.log(projects);

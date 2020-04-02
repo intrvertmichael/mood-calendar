@@ -55,6 +55,18 @@
   color: gray;
 }
 
+.logout-btn {
+  padding: 5px 10px;
+  background: var(--calendar-background);
+  border-radius: 5px;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: var(--border);
+}
+
 /* DROPDOWN */
 select {
   font-family: Jetbrains Mono, helvetica, arial, sans-serif;
