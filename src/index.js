@@ -18,7 +18,6 @@ import fb from './firebase';
 
 import thunk from 'redux-thunk';
 
-
 // STORE
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,

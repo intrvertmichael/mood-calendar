@@ -1,9 +1,5 @@
 // REDUCER
 const initial = {
-  profile: {
-    name: 'Michael',
-    dark: false
-  },
   clicked: {
     year: 2020,
     month: null,
@@ -12,14 +8,16 @@ const initial = {
   },
   calendar: {
     year2020:{
-      // month0:{ num:0, name:'January', length:31, starts:3, days:[{day:1, mood:1}, {day:2, mood:2}, {day:3, mood:3}, {day:4, mood:4}] }
-      // , month2:{ num:2, name:'March', length:31, starts:0, days:[{day:1, mood:1}] }
+      month0:{ num:0, name:'January', length:31, starts:3, days:[{day:1, mood:1}, {day:2, mood:2}, {day:3, mood:3}, {day:4, mood:4}] }
+      , month2:{ num:2, name:'March', length:31, starts:0, days:[{day:1, mood:1}] }
     }
   }
 }
 
 const calendarReducer = ( state = initial, action) => {
   switch(action.type) {
+    case 'UPDATE':
+      return state.update+1;
     case 'SET_CLICKED':
       return {
         ...state,
@@ -38,17 +36,17 @@ const calendarReducer = ( state = initial, action) => {
            year:action.year
          }
          };
-    case 'ADD_MONTH' :
-    return {
-      ...state, //copy state
-      calendar: { // go into calendar
-        ...state.calendar, //copy calendar
-        [`year${state.clicked.year}`]:{ // go into year
-          ...state.calendar[`year${state.clicked.year}`], // copy year
-          [action.name]:action.month
+    case 'ADD_MONTH':
+      return {
+        ...state, //copy state
+        calendar: { // go into calendar
+          ...state.calendar, //copy calendar
+          [`year${state.clicked.year}`]:{ // go into year
+            ...state.calendar[`year${state.clicked.year}`], // copy year
+            [action.name]:action.month
+          }
         }
       }
-    }
     case 'ADD_MOOD_DAY':
       return {
         ...state,

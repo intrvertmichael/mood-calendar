@@ -1,18 +1,16 @@
 
 // ACTIONS
 export const setClicked = (day, mood) => {
-  return {
-    type: 'SET_CLICKED',
-    day: day,
-    mood: mood
+  return(dispatch, getState)=> {
+    // console.log(`Inside of setClicked - Day:${day} Mood:${mood}`);
+    dispatch({ type: 'SET_CLICKED', day: day, mood: mood });
   }
 }
 
 export const setCalendar = (month, year) => {
-  return {
-    type: 'SET_CALENDER',
-    month: month,
-    year: year
+  return(dispatch, getState)=> {
+    // console.log(`Inside of setCalendar - Month:${month} Year:${year}`);
+    dispatch({type: 'SET_CALENDER', month: month, year: year});
   }
 }
 
@@ -25,10 +23,9 @@ export const addMoodDay = (day, mood) => {
 }
 
 export const addMonth = (name, month) => {
-  return {
-    type: 'ADD_MONTH',
-    name:name,
-    month:month
+  return(dispatch, getState)=> {
+    // console.log(`Inside of addMonth - Name:${name} Month:${month}`);
+    dispatch({type: 'ADD_MONTH', name:name,month:month});
   }
 }
 

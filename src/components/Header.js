@@ -1,18 +1,13 @@
 import React from 'react';
-
-import {useSelector, useDispatch} from 'react-redux';
+import {connect} from 'react-redux';
 import {logOut} from '../_actions';
 
 const Header = (props) => {
-  const profile = useSelector(state => state.calendar.profile);
-  const name = profile.name;
-  const dispatch = useDispatch();
-
   return(
     <div className='title'>
       <div>
-        <p>{name}'s Mood Calendar </p>
-        <button className='logout-btn' onClick={()=>dispatch(logOut())}> Log Out </button>
+        <p>{props.name}'s Mood Calendar </p>
+        <button className='logout-btn' onClick={props.logOut}> Log Out </button>
       </div>
       <div className='year'>
         <p>{props.year}</p>
@@ -21,4 +16,16 @@ const Header = (props) => {
   );
 }
 
-export default Header;
+const mapStateToProps = state =>{
+  return {
+    name: state.firebase.auth.displayName
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logOut: () => dispatch(logOut())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
