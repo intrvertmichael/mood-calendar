@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {useDispatch} from 'react-redux';
+import {connect} from 'react-redux';
 import {setClicked} from '../_actions';
 import {createProject} from '../_actions';
 
-export default (props) => {
+const Day = (props) => {
   var cPos = props.calendarPosition;
   var dayOfMonth = props.dayOfMonth;
   const today = props.today;
@@ -12,7 +12,6 @@ export default (props) => {
   var sDay = month.starts;
   var monthDays = month.days;
   var tags = '';
-  const dispatch = useDispatch();
 
   // LABEL TODAY ON CALENDAR
   var thisMonth = new Date().getMonth();
@@ -32,11 +31,10 @@ export default (props) => {
         onClick={()=>{
           if(dayOfMonth <= today || !isitthismonth)
           {
-            dispatch(setClicked(dayOfMonth, mood));
-            dispatch(createProject({name:'mario',game:'super mario'}));
-            // dispatch(logIn());
+            props.setClicked(dayOfMonth, mood);
+            props.createProject({name:'mario',game:'super mario'});
 
-            dayClicked();
+            document.querySelector('.dayClicked').classList.remove('hide');
           }
         }}> {dayOfMonth} </div>
       );
@@ -58,7 +56,11 @@ const isThereAMood = (days, dayOfMonth) => {
   return mood;
 }
 
+const mapDispatchToProps = dispatch =>{
+  return{
+    setClicked: (day, mood) => dispatch(setClicked(day, mood)) ,
+    createProject: (project) => dispatch(createProject(project))
+  }
+}
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// WHEN A DAY IS CLICKED
-const dayClicked = () => document.querySelector('.dayClicked').classList.remove('hide');
+export default connect(null, mapDispatchToProps)(Day);

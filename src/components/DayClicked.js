@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useSelector, useDispatch} from 'react-redux';
+import {connect} from 'react-redux';
 import {addMoodDay} from '../_actions';
 import {setClicked} from '../_actions';
 
@@ -8,9 +8,8 @@ const DayClicked = (props) => {
   const month = props.month;
   const today = props.today;
 
-  const clickedMood = useSelector(state => state.calendar.clicked.mood);
-  const clickedDay = useSelector(state => state.calendar.clicked.day);
-  const dispatch = useDispatch();
+  const clickedMood = props.clickedMood;
+  const clickedDay = props.clickedDay;
 
   // CLOSE BOX WHEN CLICKED OUT
   window.onclick = function(event) {
@@ -52,8 +51,8 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood1'
                 onClick={()=>{
-                  dispatch(addMoodDay(clickedDay, 1));
-                  dispatch(setClicked(clickedDay, 1));
+                  props.addMoodDay(clickedDay, 1);
+                  props.setClicked(clickedDay, 1);
                   closeWindow();
                 }}>
               </div>
@@ -63,8 +62,8 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood2'
                 onClick={()=>{
-                  dispatch(addMoodDay(clickedDay, 2));
-                  dispatch(setClicked(clickedDay, 2));
+                  props.addMoodDay(clickedDay, 2);
+                  props.setClicked(clickedDay, 2);
                   closeWindow();
                 }}>
               </div>
@@ -74,8 +73,8 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood3'
                 onClick={()=>{
-                  dispatch(addMoodDay(clickedDay, 3));
-                  dispatch(setClicked(clickedDay, 3));
+                  props.addMoodDay(clickedDay, 3);
+                  props.setClicked(clickedDay, 3);
                   closeWindow();
                 }}>
               </div>
@@ -85,8 +84,8 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood4'
                 onClick={()=>{
-                  dispatch(addMoodDay(clickedDay, 4));
-                  dispatch(setClicked(clickedDay, 4));
+                  props.addMoodDay(clickedDay, 4);
+                  props.setClicked(clickedDay, 4);
                   closeWindow();
                 }}>
               </div>
@@ -103,8 +102,7 @@ const DayClicked = (props) => {
 
 // HELPER FUNCTIONS
 const closeWindow =() => {
-  var modal = document.querySelector('.dayClicked');
-  modal.classList.add('hide');
+  document.querySelector('.dayClicked').classList.add('hide');
 }
 
 const tellMood = (mood) => {
@@ -153,4 +151,21 @@ const getMessage = (doesithavemood, isittoday, month, day, mood) => {
   return [infoMessage, ratingMessage];
 }
 
-export default DayClicked;
+
+const mapStateToProps = state => {
+  const {calendar} = state;
+  return {
+    clickedMood: calendar.clicked.mood,
+    clickedDay: calendar.clicked.day
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addMoodDay: (day, mood) => dispatch(addMoodDay(day, mood)),
+    setClicked: (day, mood) => dispatch(setClicked(day, mood))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DayClicked);
