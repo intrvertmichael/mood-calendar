@@ -13,16 +13,24 @@ import '../style/Moods.css';
 import {connect} from 'react-redux';
 import {setCalendar} from '../_actions';
 import {addMonth} from '../_actions';
+import {syncReduxFirestore} from '../_actions';
 
 import { useFirestoreConnect } from 'react-redux-firebase';
 
 const Calendar = props => {
-  // console.log('-> Inside of Calendar Component');
+  console.log('-> Inside of Calendar Component');
 
   // SYNCS THE REDUCER WITH FIREBASE
-  useFirestoreConnect('projects');
-  const projects = props.projects;
-  console.log('Firestore Projects:', projects);
+  useFirestoreConnect(`userCalendars`);
+  const userCalendars = props.userCalendars;
+  console.log('Firestore Projects:', userCalendars);
+  let enter = true;
+
+  if(typeof userCalendars !== "undefined" && enter){
+    console.log('entered type check');
+    enter = false;
+    props.syncReduxFirestore();
+  }
 
   const allMonths2020 = [
     { num:0,  name:'January',   length:31, starts:3, days:[] } ,
@@ -77,8 +85,9 @@ const Calendar = props => {
 
 const mapStateToProps = state => {
   // console.log(' ');
-  // console.log(`Component State:`, state);
+  console.log(`Component State:`, state);
   // console.log('- - - - - - - - - - - - - - - -');
+
   const {calendar} = state;
   return {
     fullState: state,
@@ -87,14 +96,16 @@ const mapStateToProps = state => {
     calendarMonth: calendar.calendar.year2020[calendar.clicked.month],
     clickedYear: calendar.clicked.year,
     clickedMonth: calendar.clicked.month,
-    projects: state.firestore.data.projects
+    userCalendars: state.firestore.data.userCalendars,
+    userId: state.firebase.auth.uid
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     addMonth: (monthName, monthObj) => dispatch( addMonth(monthName, monthObj) ),
-    setCalendar: (m, y) => dispatch(setCalendar(m,y))
+    setCalendar: (m, y) => dispatch(setCalendar(m,y)),
+    syncReduxFirestore: () => dispatch(syncReduxFirestore())
   }
 }
 

@@ -27,6 +27,14 @@ const store = createStore(reducer,
   )
 );
 
+// console.log('index is loaded');
+// store.firestore.get({ collection: 'userCalendars', doc: 'test' }).then((x)=>{
+//   console.log(x);
+// }).catch((err)=> {
+//   console.log('wasnt able to get document');
+// })
+
+
 // REACT REDUX FIREBASE OPTIONS
 const rrfProps = {
   firebase,

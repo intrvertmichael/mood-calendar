@@ -18,6 +18,9 @@ const calendarReducer = ( state = initial, action) => {
   switch(action.type) {
     case 'UPDATE':
       return state.update+1;
+    case 'SYNC_CALENDARS':
+      console.log(action);
+      return state;
     case 'SET_CLICKED':
       return {
         ...state,
@@ -65,9 +68,6 @@ const calendarReducer = ( state = initial, action) => {
           }
         }
       }
-    case 'CREATE_PROJECT':
-      console.log('project was created.')
-      return state;
     default:
       return state;
   }

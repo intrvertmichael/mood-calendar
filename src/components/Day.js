@@ -2,7 +2,6 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 import {setClicked} from '../_actions';
-import {createProject} from '../_actions';
 
 const Day = (props) => {
   var cPos = props.calendarPosition;
@@ -32,8 +31,6 @@ const Day = (props) => {
           if(dayOfMonth <= today || !isitthismonth)
           {
             props.setClicked(dayOfMonth, mood);
-            props.createProject({name:'mario',game:'super mario'});
-
             document.querySelector('.dayClicked').classList.remove('hide');
           }
         }}> {dayOfMonth} </div>
@@ -58,8 +55,7 @@ const isThereAMood = (days, dayOfMonth) => {
 
 const mapDispatchToProps = dispatch =>{
   return{
-    setClicked: (day, mood) => dispatch(setClicked(day, mood)) ,
-    createProject: (project) => dispatch(createProject(project))
+    setClicked: (day, mood) => dispatch(setClicked(day, mood))
   }
 }
 

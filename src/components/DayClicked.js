@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {addMoodDay} from '../_actions';
 import {setClicked} from '../_actions';
+import {updateFirestore} from '../_actions';
 
 const DayClicked = (props) => {
   const month = props.month;
@@ -53,6 +54,7 @@ const DayClicked = (props) => {
                 onClick={()=>{
                   props.addMoodDay(clickedDay, 1);
                   props.setClicked(clickedDay, 1);
+                  props.updateFirestore();
                   closeWindow();
                 }}>
               </div>
@@ -64,6 +66,7 @@ const DayClicked = (props) => {
                 onClick={()=>{
                   props.addMoodDay(clickedDay, 2);
                   props.setClicked(clickedDay, 2);
+                  props.updateFirestore();
                   closeWindow();
                 }}>
               </div>
@@ -75,6 +78,7 @@ const DayClicked = (props) => {
                 onClick={()=>{
                   props.addMoodDay(clickedDay, 3);
                   props.setClicked(clickedDay, 3);
+                  props.updateFirestore();
                   closeWindow();
                 }}>
               </div>
@@ -86,6 +90,7 @@ const DayClicked = (props) => {
                 onClick={()=>{
                   props.addMoodDay(clickedDay, 4);
                   props.setClicked(clickedDay, 4);
+                  props.updateFirestore();
                   closeWindow();
                 }}>
               </div>
@@ -163,7 +168,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addMoodDay: (day, mood) => dispatch(addMoodDay(day, mood)),
-    setClicked: (day, mood) => dispatch(setClicked(day, mood))
+    setClicked: (day, mood) => dispatch(setClicked(day, mood)),
+    updateFirestore: ()=> dispatch(updateFirestore())
   }
 }
 
