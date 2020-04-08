@@ -18,19 +18,27 @@ import {syncReduxFirestore} from '../_actions';
 import { useFirestoreConnect } from 'react-redux-firebase';
 
 const Calendar = props => {
-  console.log('-> Inside of Calendar Component');
+  // console.log('-> Inside of Calendar Component');
 
   // SYNCS THE REDUCER WITH FIREBASE
   useFirestoreConnect(`userCalendars`);
-  const userCalendars = props.userCalendars;
-  console.log('Firestore Projects:', userCalendars);
-  let enter = true;
+  // console.log(props.userCalendars);
 
-  if(typeof userCalendars !== "undefined" && enter){
-    console.log('entered type check');
-    enter = false;
-    props.syncReduxFirestore();
+  // FIRESTORE
+  const reduxCalendarLength = Object.keys(props.calendarYear).length;
+  if(props.userCalendars && reduxCalendarLength===1){
+    const firestoreCalendars = props.userCalendars[props.userId].stored.year2020
+    const firebaseCalendarLength = Object.keys(firestoreCalendars).length;
+    if(firebaseCalendarLength>=1){
+      console.log('Firestore is Loaded');
+      console.log('Firestore Projects:', firestoreCalendars);
+      props.syncReduxFirestore(firestoreCalendars)
+    }
+  } else {
+    console.log('didnt need to load firestore');
+    console.log(`${reduxCalendarLength} local calendars`);
   }
+
 
   const allMonths2020 = [
     { num:0,  name:'January',   length:31, starts:3, days:[] } ,
@@ -53,9 +61,12 @@ const Calendar = props => {
   let y;
 
   if(!props.clickedMonth){
+    console.log('inside of not clickMonth');
+    console.log(props.clickMonth);
     // FIRST TIME THE APP RUNS
     m = current_date.getMonth();
     y = current_date.getFullYear();
+
     if(!props.calendarYear[`month${m}`]){
       console.log(`Month${m} doesn't exist...`);
       props.addMonth(`month${m}`, allMonths2020[m]);
@@ -63,6 +74,8 @@ const Calendar = props => {
     }
     props.setCalendar(m,y);
   } else {
+
+    console.log('inside of clickMonth');
     m = props.clickedMonth;
     y = props.clickedYear;
     // console.log(`Month exists in Calendar... Month: ${m} Year: ${y}`);
@@ -85,10 +98,11 @@ const Calendar = props => {
 
 const mapStateToProps = state => {
   // console.log(' ');
-  console.log(`Component State:`, state);
+  // console.log(`Component State:`, state);
   // console.log('- - - - - - - - - - - - - - - -');
 
   const {calendar} = state;
+
   return {
     fullState: state,
     calendar: calendar.calendar,
@@ -96,8 +110,9 @@ const mapStateToProps = state => {
     calendarMonth: calendar.calendar.year2020[calendar.clicked.month],
     clickedYear: calendar.clicked.year,
     clickedMonth: calendar.clicked.month,
-    userCalendars: state.firestore.data.userCalendars,
-    userId: state.firebase.auth.uid
+    clickedDay: calendar.clicked.day,
+    userId: state.firebase.auth.uid,
+    userCalendars: state.firestore.data.userCalendars
   }
 }
 
@@ -108,5 +123,7 @@ const mapDispatchToProps = dispatch => {
     syncReduxFirestore: () => dispatch(syncReduxFirestore())
   }
 }
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar);

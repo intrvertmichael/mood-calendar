@@ -26,14 +26,26 @@ export const addMonth = (name, month) => {
   }
 }
 
-export const syncReduxFirestore = () => {
-  return (dispatch, getState) => {
-    const user = getState().firebase.auth.uid;
-    const stored = getState().firestore.data.userCalendars[user].stored;
-    console.log('inside of syncReduxFirestore');
-    console.log(stored);
 
-    // dispatch({type:'SYNC_CALENDARS'});
+
+
+// FIREBASE ACTIONS
+
+export const syncReduxFirestore = (firestoreCalendars) => {
+  return (dispatch, getState) => {
+    let user = getState().firebase.auth.uid;
+    const storedMonths = getState().firestore.data.userCalendars[user]? Object.keys(getState().firestore.data.userCalendars[user].stored.year2020) : 0;
+    const localMonths = Object.keys(getState().calendar.calendar.year2020);
+
+    if( localMonths.length === 1 ){
+      if( storedMonths.length > 1 ){
+        console.log('Calendars found on Firebase and loaded on');
+        const x = getState().firestore.data.userCalendars[user].stored.year2020;
+        dispatch({type:'SYNC_REDUX_FIREBASE_CALENDARS', stored:x});
+      }
+    } else {
+      console.log('Did not need to load Calendar off Firebase');
+    }
   }
 }
 
@@ -63,8 +75,8 @@ export const logIn = () => {
       type: 'popup'
       // scopes: ['email'] // not required
     }).then((e)=>{
-      console.log('logged in`');
-      console.log(e);
+      console.log('logged in....');
+      // console.log(e);
     }).catch(()=>{
       console.log('log in failed');
     })
