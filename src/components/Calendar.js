@@ -89,7 +89,7 @@ const firestoreSync = (props) => {
   const reduxCalendarLength = Object.keys(props.calendarYear).length;
   if(props.userCalendars && reduxCalendarLength===1){
     console.log(props.userCalendars);
-    const firestoreCalendars = props.userCalendars[props.userId]? props.userCalendars[props.userId].stored.year2020 : {};
+    const firestoreCalendars = props.userCalendars[props.userId]? props.userCalendars[props.userId].stored.year2020 : null;
     const firebaseCalendarLength = Object.keys(firestoreCalendars).length;
     if(firebaseCalendarLength>=1){
       console.log('Firestore Projects:', firestoreCalendars);
@@ -103,7 +103,7 @@ const firestoreSync = (props) => {
 
 const mapStateToProps = state => {
   // console.log(' ');
-  // console.log(`Component State:`, state);
+  console.log(`Component State:`, state);
   // console.log('- - - - - - - - - - - - - - - -');
 
   const {calendar} = state;

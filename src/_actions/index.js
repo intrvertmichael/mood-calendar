@@ -37,10 +37,24 @@ export const syncReduxFirestore = (firestoreCalendars) => {
     const storedMonths = getState().firestore.data.userCalendars[user]? Object.keys(getState().firestore.data.userCalendars[user].stored.year2020) : 0;
     const localMonths = Object.keys(getState().calendar.calendar.year2020);
 
-    if( localMonths.length === 1 ){
-      if( storedMonths.length > 1 ){
-        const x = getState().firestore.data.userCalendars[user].stored.year2020;
-        dispatch({type:'SYNC_REDUX_FIREBASE_CALENDARS', stored:x});
+
+
+    const month = getState().calendar.clicked.month;
+    const storedMonthsObj = getState().firestore.data.userCalendars[user]? getState().firestore.data.userCalendars[user].stored.year2020[`month${month}`].days : 0;
+    const localMonthsObj = getState().calendar.calendar.year2020[`month${month}`].days;
+
+
+    console.log(storedMonthsObj);
+    console.log(localMonthsObj);
+
+    if( localMonths.length >= 1 ){
+      if( storedMonths.length >= 1 ){
+        if(JSON.stringify(storedMonthsObj)===JSON.stringify(localMonthsObj)) {
+          console.log("True");
+        } else {
+          const x = getState().firestore.data.userCalendars[user].stored.year2020;
+          dispatch({type:'SYNC_REDUX_FIREBASE_CALENDARS', stored:x});
+        }
       }
     } else {
       console.log('Did not need to load Calendar off Firebase');
