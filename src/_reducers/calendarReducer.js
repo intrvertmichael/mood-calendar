@@ -17,8 +17,6 @@ const initial = {
 const calendarReducer = ( state = initial, action) => {
   switch(action.type) {
     case 'SYNC_REDUX_FIREBASE_CALENDARS':
-      console.log('SYNC_REDUX_FIREBASE_CALENDARS reducer');
-      // console.log(action.stored);
       return {
         ...state, //copy state
         calendar: { // go into calendar

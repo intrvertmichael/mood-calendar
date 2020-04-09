@@ -22,17 +22,10 @@ import thunk from 'redux-thunk';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,
   composeEnhancers(
-    applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
+    applyMiddleware( thunk.withExtraArgument({ getFirestore, getFirebase }) ),
     reduxFirestore(firebase, fb)
   )
 );
-
-// console.log('index is loaded');
-// store.firestore.get({ collection: 'userCalendars', doc: 'test' }).then((x)=>{
-//   console.log(x);
-// }).catch((err)=> {
-//   console.log('wasnt able to get document');
-// })
 
 
 // REACT REDUX FIREBASE OPTIONS

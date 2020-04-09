@@ -39,7 +39,6 @@ export const syncReduxFirestore = (firestoreCalendars) => {
 
     if( localMonths.length === 1 ){
       if( storedMonths.length > 1 ){
-        console.log('Calendars found on Firebase and loaded on');
         const x = getState().firestore.data.userCalendars[user].stored.year2020;
         dispatch({type:'SYNC_REDUX_FIREBASE_CALENDARS', stored:x});
       }
