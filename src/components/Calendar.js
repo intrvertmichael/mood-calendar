@@ -88,7 +88,8 @@ const Calendar = props => {
 const firestoreSync = (props) => {
   const reduxCalendarLength = Object.keys(props.calendarYear).length;
   if(props.userCalendars && reduxCalendarLength===1){
-    const firestoreCalendars = props.userCalendars[props.userId].stored.year2020
+    console.log(props.userCalendars);
+    const firestoreCalendars = props.userCalendars[props.userId]? props.userCalendars[props.userId].stored.year2020 : {};
     const firebaseCalendarLength = Object.keys(firestoreCalendars).length;
     if(firebaseCalendarLength>=1){
       console.log('Firestore Projects:', firestoreCalendars);
