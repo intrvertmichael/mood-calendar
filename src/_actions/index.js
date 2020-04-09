@@ -33,28 +33,19 @@ export const addMonth = (name, month) => {
 
 export const syncReduxFirestore = (firestoreCalendars) => {
   return (dispatch, getState) => {
-    let user = getState().firebase.auth.uid;
-    const storedMonths = getState().firestore.data.userCalendars[user]? Object.keys(getState().firestore.data.userCalendars[user].stored.year2020) : 0;
+
     const localMonths = Object.keys(getState().calendar.calendar.year2020);
 
 
-
-    const month = getState().calendar.clicked.month;
-    const storedMonthsObj = getState().firestore.data.userCalendars[user]? getState().firestore.data.userCalendars[user].stored.year2020[`month${month}`].days : 0;
-    const localMonthsObj = getState().calendar.calendar.year2020[`month${month}`].days;
-
-
-    console.log(storedMonthsObj);
-    console.log(localMonthsObj);
-
     if( localMonths.length >= 1 ){
-      if( storedMonths.length >= 1 ){
-        if(JSON.stringify(storedMonthsObj)===JSON.stringify(localMonthsObj)) {
-          console.log("True");
-        } else {
-          const x = getState().firestore.data.userCalendars[user].stored.year2020;
-          dispatch({type:'SYNC_REDUX_FIREBASE_CALENDARS', stored:x});
-        }
+      const user = getState().firebase.auth.uid;
+      const month = getState().calendar.clicked.month;
+      const localMonthsObj = getState().calendar.calendar.year2020[`month${month}`].days;
+      const storedMonthsObj = getState().firestore.data.userCalendars[user]? getState().firestore.data.userCalendars[user].stored.year2020[`month${month}`].days : 0;
+
+      if( JSON.stringify(storedMonthsObj)!==JSON.stringify(localMonthsObj) ) {
+        const x = getState().firestore.data.userCalendars[user].stored.year2020;
+        dispatch({type:'SYNC_REDUX_FIREBASE_CALENDARS', stored:x});
       }
     } else {
       console.log('Did not need to load Calendar off Firebase');
@@ -88,10 +79,10 @@ export const logIn = () => {
       type: 'popup'
       // scopes: ['email'] // not required
     }).then((e)=>{
-      console.log('logged in....');
+      console.log('Logged in....');
       // console.log(e);
     }).catch(()=>{
-      console.log('log in failed');
+      console.log('Log in failed');
     })
   }
 }
@@ -100,7 +91,7 @@ export const logOut = () =>{
   return(dispatch, getState, {getFirebase})=>{
     const firebase = getFirebase();
     firebase.auth().signOut().then(()=>{
-      console.log('signed out');
+      console.log('Signed Out');
     })
   }
 }
