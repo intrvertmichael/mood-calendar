@@ -3,9 +3,7 @@
 const current = {
   year: 2020,
   month: null,
-  day: null,
-  mood: null,
-  message: null
+  day: null
 }
 
 const currentReducer = ( state=current, action ) => {
@@ -13,12 +11,12 @@ const currentReducer = ( state=current, action ) => {
     case 'SET_CURRENT':
       return { ...state, year:action.year, month: action.month, day: action.day, mood: action.mood, message: action.message };
 
-    case 'SET_CLICKED':
-      return { ...state, day:action.day, mood:action.mood };
+    case 'SET_CURRENT_MONTH':
+      return { ...state, month:action.month};
 
-    case 'SET_CALENDER':
-      return { ...state, month:action.month, year:action.year };
-      
+    case 'SET_CURRENT_DAY':
+      return { ...state, day:action.day};
+
     default:
       return state;
   }

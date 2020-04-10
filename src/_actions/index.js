@@ -2,27 +2,40 @@
 
 // LOCAL ACTIONS
 
-export const setClicked = (day, mood) => {
-  return { type: 'SET_CLICKED', day: day, mood: mood };
+export const setCurrentMonth = (month) => {
+  return { type: 'SET_CURRENT_MONTH', month: month} ;
+}
+export const setCurrentDay = (day) => {
+  return { type: 'SET_CURRENT_DAY', day: day};
 }
 
-export const setCalendar = (month, year) => {
-  return { type: 'SET_CALENDER', month: month, year: year } ;
+
+
+export const addMonth = (monthName, month) => {
+  return { type: 'ADD_MONTH', monthName:monthName, month:month } ;
+}
+export const addDay = (dayNamw, day) => {
+  return(dispatch, getState) => {
+    const currentMonth = getState().current.month;
+    dispatch({type: 'ADD_DAY', dayName: dayName, day: day, month:currentMonth});
+  }
 }
 
 
 
-
-export const addMonth = (name, month) => {
-  return { type: 'ADD_MONTH', name:name, month:month } ;
+export const setMood = (mood) => {
+  return (dispatch, getState) => {
+    const currentMonth = getState().current.month;
+    const currentDay = getState().current.day;
+    dispatch({ type: 'SET_MOOD', month:currentMonth, day:currentDay, mood:mood });
+  }
 }
-
-export const addMoodDay = (day, mood, message) => {
-  return { type: 'ADD_MOOD_DAY', day: day, mood: mood, message:message}
-}
-
-export const addMessage = (day, message) => {
-  return { type: 'ADD_MESSAGE', day:day, message:message }
+export const setMessage = (message) => {
+  return (dispatch, getState) => {
+    const currentMonth = getState().current.month;
+    const currentDay = getState().current.day;
+    dispatch({ type: 'SET_MESSAGE', month:currentMonth, day:currentDay, message:message });
+  }
 }
 
 
