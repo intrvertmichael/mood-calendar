@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setCalendar} from '../_actions';
+import {setCurrentMonth} from '../_actions';
 
 const Month = (props) => {
   // console.log('-> Inside of Month Component');
@@ -13,7 +13,7 @@ const Month = (props) => {
         {
           allMonths.length > 1 ?
           <select className="months" defaultValue={'DEFAULT'} onChange={
-            ()=>{props.setCalendar(document.querySelector('.months').value, props.yearName)}
+            ()=>{props.setCurrentMonth(document.querySelector('.months').value)}
           }>
             {allMonths.map(month => {
               const singleMonth = month[1];
@@ -43,7 +43,7 @@ const Month = (props) => {
 
 const mapDispatchToProps = dispatch =>{
   return {
-    setCalendar: (m, y) => dispatch(setCalendar(m,y))
+    setCurrentMonth: (m, y) => dispatch(setCurrentMonth(m))
   }
 }
 

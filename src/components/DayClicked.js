@@ -1,9 +1,9 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {addMoodDay} from '../_actions';
-import {addMessage} from '../_actions';
-import {setClicked} from '../_actions';
+
+import {setMood} from '../_actions';
+import {setMessage} from '../_actions';
 import {updateFirestore} from '../_actions';
 
 const DayClicked = (props) => {
@@ -48,7 +48,7 @@ const DayClicked = (props) => {
         <div className='info-window'>
           <p> {infoMessage} </p>
           <div className={`${bigfacetags}`} onClick={()=>{
-            props.addMessage(clickedDay,'hello');
+            props.setMessage('hello');
             props.updateFirestore();
             }
           }> {message} </div>
@@ -61,8 +61,7 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood1'
                 onClick={()=>{
-                  props.addMoodDay(clickedDay, 1, message);
-                  props.setClicked(clickedDay, 1);
+                  props.setMood(1);
                   props.updateFirestore();
                 }}>
               </div>
@@ -72,8 +71,7 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood2'
                 onClick={()=>{
-                  props.addMoodDay(clickedDay, 2, message);
-                  props.setClicked(clickedDay, 2);
+                  props.setMood(2);
                   props.updateFirestore();
                 }}>
               </div>
@@ -83,8 +81,7 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood3'
                 onClick={()=>{
-                  props.addMoodDay(clickedDay, 3, message);
-                  props.setClicked(clickedDay, 3);
+                  props.setMood(3);
                   props.updateFirestore();
                 }}>
               </div>
@@ -94,8 +91,7 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood4'
                 onClick={()=>{
-                  props.addMoodDay(clickedDay, 4, message);
-                  props.setClicked(clickedDay, 4);
+                  props.setMood(4);
                   props.updateFirestore();
                 }}>
               </div>
@@ -163,19 +159,17 @@ const getMessage = (doesithavemood, isittoday, month, day, mood) => {
 
 
 const mapStateToProps = state => {
-  const {calendar} = state;
   return {
-    clickedMood: calendar.clicked.mood,
-    clickedMonth: calendar.clicked.month,
-    clickedDay: calendar.clicked.day
+    // clickedMood: state.current.mood,
+    clickedMonth: state.current.month,
+    clickedDay: state.current.day
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    addMoodDay: (day, mood, message) => dispatch(addMoodDay(day, mood, message)),
-    addMessage: (day, message) => dispatch(addMessage(day, message)),
-    setClicked: (day, mood) => dispatch(setClicked(day, mood)),
+    setMood: (mood) => dispatch(setMood(mood)),
+    setMessage: (message) => dispatch(setMessage(message)),
     updateFirestore: ()=> dispatch(updateFirestore())
   }
 }

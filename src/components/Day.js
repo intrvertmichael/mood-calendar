@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {setClicked} from '../_actions';
+import {setCurrentDay} from '../_actions';
 
 const Day = (props) => {
   var cPos = props.calendarPosition;
@@ -30,7 +30,7 @@ const Day = (props) => {
         onClick={()=>{
           if(dayOfMonth <= today || !isitthismonth)
           {
-            props.setClicked(dayOfMonth, mood);
+            props.setCurrentDay(dayOfMonth);
             document.querySelector('.dayClicked').classList.remove('hide');
           }
         }}> {dayOfMonth} </div>
@@ -55,7 +55,7 @@ const isThereAMood = (days, dayOfMonth) => {
 
 const mapDispatchToProps = dispatch =>{
   return{
-    setClicked: (day, mood) => dispatch(setClicked(day, mood))
+    setCurrentDay: (day) => dispatch(setCurrentDay(day))
   }
 }
 

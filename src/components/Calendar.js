@@ -12,7 +12,8 @@ import '../style/Moods.css';
 
 import {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {setCalendar} from '../_actions';
+
+import {setCurrentMonth} from '../_actions';
 import {addMonth} from '../_actions';
 import {syncReduxFirestore} from '../_actions';
 
@@ -53,7 +54,7 @@ const Calendar = props => {
       console.log(`Month${m} was created...`);
     }
 
-    props.setCalendar(m,y);
+    props.setCurrentMonth(m);
   } else {
     m = props.clickedMonth;
     y = props.clickedYear;
@@ -86,6 +87,7 @@ const Calendar = props => {
 
 const firestoreSync = (props) => {
   const reduxCalendarLength = Object.keys(props.calendarYear).length;
+
   if(props.userCalendars && reduxCalendarLength===1){
     const firestoreCalendars = props.userCalendars[props.userId]? props.userCalendars[props.userId].stored.year2020 : [];
     const firebaseCalendarLength = Object.keys(firestoreCalendars).length;
@@ -94,6 +96,8 @@ const firestoreSync = (props) => {
       console.log('Firestore Projects:', firestoreCalendars);
       props.syncReduxFirestore();
     }
+  } else {
+    console.log("Didn't need to sync with Firestore");
   }
 }
 
@@ -102,16 +106,15 @@ const firestoreSync = (props) => {
 const mapStateToProps = state => {
   console.log(`Component State:`, state);
   console.log('- - - - - - - - - - - - - - - -');
-  const {calendar} = state;
 
   return {
     fullState: state,
-    calendar: calendar.calendar,
-    calendarYear: calendar.calendar.year2020,
-    calendarMonth: calendar.calendar.year2020[calendar.clicked.month],
-    clickedYear: calendar.clicked.year,
-    clickedMonth: calendar.clicked.month,
-    clickedDay: calendar.clicked.day,
+    calendar: state.calendar,
+    calendarYear: state.calendar.year2020,
+    // calendarMonth: state.calendar.year2020[state.current.month],
+    clickedYear: state.current.year,
+    clickedMonth: state.current.month,
+    clickedDay: state.current.day,
     userId: state.firebase.auth.uid,
     userCalendars: state.firestore.data.userCalendars
   }
@@ -120,7 +123,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addMonth: (monthName, monthObj) => dispatch( addMonth(monthName, monthObj) ),
-    setCalendar: (m, y) => dispatch(setCalendar(m,y)),
+    setCurrentMonth: month => dispatch(setCurrentMonth(month)),
     syncReduxFirestore: () => dispatch(syncReduxFirestore())
   }
 }

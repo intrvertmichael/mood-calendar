@@ -14,7 +14,7 @@ export const setCurrentDay = (day) => {
 export const addMonth = (monthName, month) => {
   return { type: 'ADD_MONTH', monthName:monthName, month:month } ;
 }
-export const addDay = (dayNamw, day) => {
+export const addDay = (dayName, day) => {
   return(dispatch, getState) => {
     const currentMonth = getState().current.month;
     dispatch({type: 'ADD_DAY', dayName: dayName, day: day, month:currentMonth});
@@ -46,6 +46,9 @@ export const setMessage = (message) => {
 // when app first starts.
 export const syncReduxFirestore = (firestoreCalendars) => {
   return (dispatch, getState) => {
+    console.log('sync redux firestore');
+    console.log(getState());
+
     const localMonths = Object.keys(getState().calendar.calendar.year2020);
 
     if( localMonths.length >= 1 ){
