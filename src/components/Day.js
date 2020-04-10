@@ -44,10 +44,11 @@ const Day = (props) => {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // CHECK DAY AND COLOR CALENDAR IF THERE IS A MOOD
 const isThereAMood = (days, dayOfMonth) => {
+  const daysLength = Object.keys(days);
   var mood;
-  for(var i=0; i<days.length;i++){
-    if(days[i].day === dayOfMonth){
-      mood = days[i].mood;
+  for(var i=0; i<daysLength.length;i++){
+    if(daysLength[i] === `day${dayOfMonth}`){
+      mood = days[daysLength[i]].mood;
     }
   }
   return mood;

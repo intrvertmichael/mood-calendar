@@ -46,16 +46,13 @@ export const setMessage = (message) => {
 // when app first starts.
 export const syncReduxFirestore = (firestoreCalendars) => {
   return (dispatch, getState) => {
-    console.log('sync redux firestore');
-    console.log(getState());
-
-    const localMonths = Object.keys(getState().calendar.calendar.year2020);
+    const localMonths = Object.keys(getState().calendar.year2020);
 
     if( localMonths.length >= 1 ){
       const user = getState().firebase.auth.uid;
-      const month = getState().calendar.clicked.month;
-      const localDaysArray = getState().calendar.calendar.year2020[`month${month}`].days;
-      const storedDaysArray = getState().firestore.data.userCalendars[user]? getState().firestore.data.userCalendars[user].stored.year2020[`month${month}`].days : 0;
+      const month = getState().current.month;
+      const localDaysArray = Object.keys(getState().calendar.year2020[`month${month}`].days);
+      const storedDaysArray = getState().firestore.data.userCalendars[user]? Object.keys(getState().firestore.data.userCalendars[user].stored.year2020[`month${month}`].days) : 0;
 
       if( JSON.stringify(storedDaysArray)!==JSON.stringify(localDaysArray) ) {
         const x = getState().firestore.data.userCalendars[user].stored.year2020;
@@ -72,7 +69,7 @@ export const updateFirestore = () => {
     const id = getState().firebase.auth.uid;
 
     firestore.collection('userCalendars').doc(id).set({
-      stored: getState().calendar.calendar,
+      stored: getState().calendar,
       displayName: getState().firebase.auth.displayName,
       email: getState().firebase.auth.email,
       lastUpdateAt: new Date()

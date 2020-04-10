@@ -9,12 +9,7 @@ import {updateFirestore} from '../_actions';
 const DayClicked = (props) => {
   const month = props.month;
   const today = props.today;
-
-  const clickedMood = props.clickedMood;
   const clickedDay = props.clickedDay;
-
-  // console.log(props.month.days);
-  // console.log(props);
 
   // CLOSE BOX WHEN CLICKED OUT
   window.onclick = function(event) {
@@ -28,15 +23,13 @@ const DayClicked = (props) => {
   let bigfacetags=``;
   let message;
 
-  // HAS IT ALREADY BEEN GIVEN A MOOD OR MESSAGE?
-  for(var i=0; i<month.days.length;i++){
-    if( month.days[i].day === clickedDay){
-      doesithavemood = true;
-      mood = tellMood(clickedMood);
-      bigfacetags = `big-circle mood${clickedMood}`;
-      message = month.days[i].message?month.days[i].message:'';
-    }
+  if( month.days[`day${clickedDay}`]){
+    doesithavemood = true;
+    mood = tellMood(month.days[`day${clickedDay}`].mood);
+    bigfacetags = `big-circle mood${month.days[`day${clickedDay}`].mood}`;
+    message = month.days[`day${clickedDay}`].message?month.days[`day${clickedDay}`].message:'';
   }
+
 
   // CREATE MESSAGES
   let [infoMessage, ratingMessage] = getMessage(doesithavemood, isittoday, month.name, clickedDay, mood);
@@ -160,7 +153,6 @@ const getMessage = (doesithavemood, isittoday, month, day, mood) => {
 
 const mapStateToProps = state => {
   return {
-    // clickedMood: state.current.mood,
     clickedMonth: state.current.month,
     clickedDay: state.current.day
   }
