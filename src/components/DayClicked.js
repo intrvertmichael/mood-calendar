@@ -2,6 +2,7 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 import {addMoodDay} from '../_actions';
+import {addMessage} from '../_actions';
 import {setClicked} from '../_actions';
 import {updateFirestore} from '../_actions';
 
@@ -11,6 +12,9 @@ const DayClicked = (props) => {
 
   const clickedMood = props.clickedMood;
   const clickedDay = props.clickedDay;
+
+  // console.log(props.month.days);
+  // console.log(props);
 
   // CLOSE BOX WHEN CLICKED OUT
   window.onclick = function(event) {
@@ -22,14 +26,15 @@ const DayClicked = (props) => {
 
   let mood = '';
   let bigfacetags=``;
+  let message;
 
-  // HAS IT ALREADY BEEN GIVEN A MOOD ?
+  // HAS IT ALREADY BEEN GIVEN A MOOD OR MESSAGE?
   for(var i=0; i<month.days.length;i++){
     if( month.days[i].day === clickedDay){
-      // IF SO
       doesithavemood = true;
       mood = tellMood(clickedMood);
-      bigfacetags = `big-circle mood${clickedMood}`
+      bigfacetags = `big-circle mood${clickedMood}`;
+      message = month.days[i].message?month.days[i].message:'';
     }
   }
 
@@ -42,7 +47,11 @@ const DayClicked = (props) => {
         <span className='close' onClick={closeWindow}> x </span>
         <div className='info-window'>
           <p> {infoMessage} </p>
-          <div className={`${bigfacetags}`}></div>
+          <div className={`${bigfacetags}`} onClick={()=>{
+            props.addMessage(clickedDay,'hello');
+            props.updateFirestore();
+            }
+          }> {message} </div>
         </div>
 
         <div className='rating'>
@@ -52,10 +61,9 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood1'
                 onClick={()=>{
-                  props.addMoodDay(clickedDay, 1);
+                  props.addMoodDay(clickedDay, 1, message);
                   props.setClicked(clickedDay, 1);
                   props.updateFirestore();
-                  closeWindow();
                 }}>
               </div>
               <p>Bad</p>
@@ -64,10 +72,9 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood2'
                 onClick={()=>{
-                  props.addMoodDay(clickedDay, 2);
+                  props.addMoodDay(clickedDay, 2, message);
                   props.setClicked(clickedDay, 2);
                   props.updateFirestore();
-                  closeWindow();
                 }}>
               </div>
               <p>Okay</p>
@@ -76,10 +83,9 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood3'
                 onClick={()=>{
-                  props.addMoodDay(clickedDay, 3);
+                  props.addMoodDay(clickedDay, 3, message);
                   props.setClicked(clickedDay, 3);
                   props.updateFirestore();
-                  closeWindow();
                 }}>
               </div>
               <p>GOOD</p>
@@ -88,10 +94,9 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood4'
                 onClick={()=>{
-                  props.addMoodDay(clickedDay, 4);
+                  props.addMoodDay(clickedDay, 4, message);
                   props.setClicked(clickedDay, 4);
                   props.updateFirestore();
-                  closeWindow();
                 }}>
               </div>
               <p>REALLY GOOD</p>
@@ -161,13 +166,15 @@ const mapStateToProps = state => {
   const {calendar} = state;
   return {
     clickedMood: calendar.clicked.mood,
+    clickedMonth: calendar.clicked.month,
     clickedDay: calendar.clicked.day
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    addMoodDay: (day, mood) => dispatch(addMoodDay(day, mood)),
+    addMoodDay: (day, mood, message) => dispatch(addMoodDay(day, mood, message)),
+    addMessage: (day, message) => dispatch(addMessage(day, message)),
     setClicked: (day, mood) => dispatch(setClicked(day, mood)),
     updateFirestore: ()=> dispatch(updateFirestore())
   }

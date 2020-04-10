@@ -1,29 +1,28 @@
 
-// ACTIONS
+
+// LOCAL ACTIONS
+
 export const setClicked = (day, mood) => {
-  return(dispatch, getState)=> {
-    dispatch({ type: 'SET_CLICKED', day: day, mood: mood });
-  }
+  return { type: 'SET_CLICKED', day: day, mood: mood };
 }
 
 export const setCalendar = (month, year) => {
-  return(dispatch, getState)=> {
-    dispatch({type: 'SET_CALENDER', month: month, year: year});
-  }
+  return { type: 'SET_CALENDER', month: month, year: year } ;
 }
 
-export const addMoodDay = (day, mood) => {
-  return {
-    type: 'ADD_MOOD_DAY',
-    day: day,
-    mood: mood
-  }
-}
+
+
 
 export const addMonth = (name, month) => {
-  return(dispatch, getState)=> {
-    dispatch({type: 'ADD_MONTH', name:name,month:month});
-  }
+  return { type: 'ADD_MONTH', name:name, month:month } ;
+}
+
+export const addMoodDay = (day, mood, message) => {
+  return { type: 'ADD_MOOD_DAY', day: day, mood: mood, message:message}
+}
+
+export const addMessage = (day, message) => {
+  return { type: 'ADD_MESSAGE', day:day, message:message }
 }
 
 
@@ -31,33 +30,32 @@ export const addMonth = (name, month) => {
 
 // FIREBASE ACTIONS
 
+// when app first starts.
 export const syncReduxFirestore = (firestoreCalendars) => {
   return (dispatch, getState) => {
-
     const localMonths = Object.keys(getState().calendar.calendar.year2020);
-
 
     if( localMonths.length >= 1 ){
       const user = getState().firebase.auth.uid;
       const month = getState().calendar.clicked.month;
-      const localMonthsObj = getState().calendar.calendar.year2020[`month${month}`].days;
-      const storedMonthsObj = getState().firestore.data.userCalendars[user]? getState().firestore.data.userCalendars[user].stored.year2020[`month${month}`].days : 0;
+      const localDaysArray = getState().calendar.calendar.year2020[`month${month}`].days;
+      const storedDaysArray = getState().firestore.data.userCalendars[user]? getState().firestore.data.userCalendars[user].stored.year2020[`month${month}`].days : 0;
 
-      if( JSON.stringify(storedMonthsObj)!==JSON.stringify(localMonthsObj) ) {
+      if( JSON.stringify(storedDaysArray)!==JSON.stringify(localDaysArray) ) {
         const x = getState().firestore.data.userCalendars[user].stored.year2020;
         dispatch({type:'SYNC_REDUX_FIREBASE_CALENDARS', stored:x});
       }
-    } else {
-      console.log('Did not need to load Calendar off Firebase');
     }
   }
 }
 
+// when a mood is clicked
 export const updateFirestore = () => {
   return (dispatch, getState, {getFirestore}) => {
     const firestore = getFirestore();
+    const id = getState().firebase.auth.uid;
 
-    firestore.collection('userCalendars').doc(getState().firebase.auth.uid).set({
+    firestore.collection('userCalendars').doc(id).set({
       stored: getState().calendar.calendar,
       displayName: getState().firebase.auth.displayName,
       email: getState().firebase.auth.email,
@@ -65,8 +63,8 @@ export const updateFirestore = () => {
     }).then(()=>{
       console.log('Firestore was updated');
     }).catch((err)=>{
-      console.log('Not able to update Firestore')
-      console.log(err)
+      console.log('Not able to update Firestore');
+      console.log(err);
     })
   }
 }
@@ -77,10 +75,8 @@ export const logIn = () => {
     firebase.login({
       provider: 'google',
       type: 'popup'
-      // scopes: ['email'] // not required
     }).then((e)=>{
-      console.log('Logged in....');
-      // console.log(e);
+      console.log('Logged in...');
     }).catch(()=>{
       console.log('Log in failed');
     })
@@ -91,7 +87,7 @@ export const logOut = () =>{
   return(dispatch, getState, {getFirebase})=>{
     const firebase = getFirebase();
     firebase.auth().signOut().then(()=>{
-      console.log('Signed Out');
+      console.log('Signed Out...');
     })
   }
 }

@@ -96,7 +96,11 @@
   border-radius: 50%;
   border: 2px solid white;
   margin: 50px auto 75px auto;
-  pointer-events: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 .close {
