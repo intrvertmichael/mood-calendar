@@ -27,7 +27,7 @@ const DayClicked = (props) => {
     doesithavemood = true;
     mood = tellMood(month.days[`day${clickedDay}`].mood);
     bigfacetags = `big-circle mood${month.days[`day${clickedDay}`].mood}`;
-    message = month.days[`day${clickedDay}`].message?month.days[`day${clickedDay}`].message:'';
+    message = month.days[`day${clickedDay}`].message?month.days[`day${clickedDay}`].message:'Why? ';
   }
 
 
@@ -41,7 +41,8 @@ const DayClicked = (props) => {
         <div className='info-window'>
           <p> {infoMessage} </p>
           <div className={`${bigfacetags}`} onClick={()=>{
-            props.setMessage('hello');
+            var m = prompt(`Why were you feeling that way?`);
+            props.setMessage(m);
             props.updateFirestore();
             }
           }> {message} </div>

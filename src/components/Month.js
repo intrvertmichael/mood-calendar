@@ -43,7 +43,7 @@ const Month = (props) => {
 
 const mapDispatchToProps = dispatch =>{
   return {
-    setCurrentMonth: (m, y) => dispatch(setCurrentMonth(m))
+    setCurrentMonth: (m) => dispatch(setCurrentMonth(m))
   }
 }
 

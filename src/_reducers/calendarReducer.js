@@ -1,8 +1,8 @@
 // REDUCER
 const initial = {
   year2020:{
-    // month0:{ num:0, name:'January', length:31, starts:3, days:[{day:1, mood:1}, {day:2, mood:2}, {day:3, mood:3}, {day:4, mood:4}] }
-    // , month2:{ num:2, name:'March', length:31, starts:0, days:[{day:1, mood:1}] }
+    // month0:{ num:0, name:'January', length:31, starts:3, days:{day1:{mood:1}, day2:{mood:2}, day3:{mood:3}, day4:{mood:4}}},
+    // month2:{ num:2, name:'March', length:31, starts:0, days:{day11:{mood:1}, day12:{mood:2}, day13:{mood:3}, day14:{mood:4}} }
   }
 }
 
@@ -13,7 +13,10 @@ const calendarReducer = ( state = initial, action) => {
     case 'SYNC_REDUX_FIREBASE_CALENDARS':
       return {
         ...state,
-        [`year2020`] : action.stored
+        [`year2020`] : {
+          ...state['year2020'],
+          ...action.stored
+        }
       }
 
     // monthName, month

@@ -1,4 +1,4 @@
-
+import _ from 'lodash';
 
 // LOCAL ACTIONS
 
@@ -45,19 +45,15 @@ export const setMessage = (message) => {
 
 // when app first starts.
 export const syncReduxFirestore = (firestoreCalendars) => {
+  const fireObj = firestoreCalendars.year2020;
   return (dispatch, getState) => {
-    const localMonths = Object.keys(getState().calendar.year2020);
+    const localObj = getState().calendar.year2020;
+    const equal = _.isEqual(localObj, fireObj);
+    // console.log('local', localObj);
+    // console.log('fire', fireObj);
 
-    if( localMonths.length >= 1 ){
-      const user = getState().firebase.auth.uid;
-      const month = getState().current.month;
-      const localDaysArray = Object.keys(getState().calendar.year2020[`month${month}`].days);
-      const storedDaysArray = getState().firestore.data.userCalendars[user]? Object.keys(getState().firestore.data.userCalendars[user].stored.year2020[`month${month}`].days) : 0;
-
-      if( JSON.stringify(storedDaysArray)!==JSON.stringify(localDaysArray) ) {
-        const x = getState().firestore.data.userCalendars[user].stored.year2020;
-        dispatch({type:'SYNC_REDUX_FIREBASE_CALENDARS', stored:x});
-      }
+    if( !equal ) {
+      dispatch({type:'SYNC_REDUX_FIREBASE_CALENDARS', stored:fireObj});
     }
   }
 }
@@ -75,7 +71,7 @@ export const updateFirestore = () => {
       lastUpdateAt: new Date()
     }).then(()=>{
       console.log('Firestore was updated');
-    }).catch((err)=>{
+    }).catch( err =>{
       console.log('Not able to update Firestore');
       console.log(err);
     })

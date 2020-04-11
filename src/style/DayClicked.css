@@ -101,6 +101,9 @@
   justify-content: center;
   align-content: center;
   align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .close {
