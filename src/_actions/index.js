@@ -23,6 +23,14 @@ export const addDay = (dayName, day) => {
 
 
 
+export const clearDay = () => {
+  return (dispatch, getState) => {
+    const currentMonth = getState().current.month;
+    const currentDay = getState().current.day;
+    dispatch({ type: 'CLEAR_DAY', month:currentMonth, day:currentDay});
+    console.log(getState());
+  }
+}
 export const setMood = (mood) => {
   return (dispatch, getState) => {
     const currentMonth = getState().current.month;

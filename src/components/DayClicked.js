@@ -2,6 +2,7 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 
+import {clearDay} from '../_actions';
 import {setMood} from '../_actions';
 import {setMessage} from '../_actions';
 import {updateFirestore} from '../_actions';
@@ -91,8 +92,13 @@ const DayClicked = (props) => {
               </div>
               <p>REALLY GOOD</p>
             </div>
-
           </div>
+
+          <button className='clearDay' onClick={()=>{
+            props.clearDay();
+            props.updateFirestore();
+          }}>Clear Day</button>
+
         </div>
       </div>
     </div>
@@ -161,6 +167,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    clearDay: () => dispatch(clearDay()),
     setMood: (mood) => dispatch(setMood(mood)),
     setMessage: (message) => dispatch(setMessage(message)),
     updateFirestore: ()=> dispatch(updateFirestore())

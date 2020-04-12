@@ -1,3 +1,6 @@
+
+import _ from 'lodash';
+
 // REDUCER
 const initial = {
   year2020:{
@@ -13,7 +16,7 @@ const calendarReducer = ( state = initial, action) => {
     case 'SYNC_REDUX_FIREBASE_CALENDARS':
       return {
         ...state,
-        [`year2020`] : {
+        [`year2020`]:{
           ...state['year2020'],
           ...action.stored
         }
@@ -23,7 +26,7 @@ const calendarReducer = ( state = initial, action) => {
     case 'ADD_MONTH':
       return {
         ...state,
-        [`year2020`] : {
+        [`year2020`]:{
           ...state[`year2020`],
           [action.monthName] : action.month
         }
@@ -33,13 +36,13 @@ const calendarReducer = ( state = initial, action) => {
     case 'ADD_DAY':
       return {
         ...state,
-        [`year2020`] : {
+        [`year2020`]:{
           ...state[`year2020`],
-          [`month${action.month}`] : {
+          [`month${action.month}`]:{
             ...state[`year2020`][`month${action.month}`],
-            days : {
+            days:{
               ...state[`year2020`][`month${action.month}`].days,
-              [action.dayName] : action.day
+              [action.dayName]:action.day
             }
           }
         }
@@ -51,11 +54,11 @@ const calendarReducer = ( state = initial, action) => {
         ...state,
         [`year2020`]:{
           ...state[`year2020`],
-          [`month${action.month}`] : {
+          [`month${action.month}`]:{
             ...state[`year2020`][`month${action.month}`],
             days : {
                 ...state[`year2020`][`month${action.month}`].days,
-                [`day${action.day}`] : {
+                [`day${action.day}`]:{
                   ...state[`year2020`][`month${action.month}`].days[`day${action.day}`],
                   mood:action.mood
                 }
@@ -70,11 +73,11 @@ const calendarReducer = ( state = initial, action) => {
         ...state,
         [`year2020`]:{
           ...state[`year2020`],
-          [`month${action.month}`] : {
+          [`month${action.month}`]:{
             ...state[`year2020`][`month${action.month}`],
             days : {
                 ...state[`year2020`][`month${action.month}`].days,
-                [`day${action.day}`] : {
+                [`day${action.day}`]:{
                   ...state[`year2020`][`month${action.month}`].days[`day${action.day}`],
                   message:action.message
                 }
@@ -82,6 +85,11 @@ const calendarReducer = ( state = initial, action) => {
           }
         }
       }
+
+    case 'CLEAR_DAY':
+      const newState = _.cloneDeep(state);
+      _.unset(newState, `year2020.month${action.month}.days.day${action.day}`);
+      return newState;
 
     default:
       return state;
