@@ -4,6 +4,8 @@ import Header from './Header';
 import Month from './Month';
 import AllDays from './AllDays';
 import DayClicked from './DayClicked';
+import ClearDayResponse from './ClearDayResponse';
+
 import _ from 'lodash';
 import '../style/Calendar.css';
 import '../style/Day.css';
@@ -92,7 +94,7 @@ const Calendar = props => {
       </div>
 
       <DayClicked month={month} today={d}/>
-
+      <ClearDayResponse />
     </div>
   );
 

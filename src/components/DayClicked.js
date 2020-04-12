@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-
 import {clearDay} from '../_actions';
 import {setMood} from '../_actions';
 import {setMessage} from '../_actions';
@@ -53,51 +52,36 @@ const DayClicked = (props) => {
           <p> {ratingMessage}</p>
 
           <div className = 'rating-circles'>
+
             <div className='circle-container'>
-              <div className='circle mood1'
-                onClick={()=>{
-                  props.setMood(1);
-                  props.updateFirestore();
-                }}>
+              <div className='circle mood1' onClick={()=>responseMessage(props, 1)}>
               </div>
               <p>Bad</p>
             </div>
 
             <div className='circle-container'>
-              <div className='circle mood2'
-                onClick={()=>{
-                  props.setMood(2);
-                  props.updateFirestore();
-                }}>
+              <div className='circle mood2' onClick={()=>responseMessage(props, 2)}>
               </div>
               <p>Okay</p>
             </div>
 
             <div className='circle-container'>
-              <div className='circle mood3'
-                onClick={()=>{
-                  props.setMood(3);
-                  props.updateFirestore();
-                }}>
+              <div className='circle mood3' onClick={()=>responseMessage(props, 3)}>
               </div>
               <p>GOOD</p>
             </div>
 
             <div className='circle-container'>
-              <div className='circle mood4'
-                onClick={()=>{
-                  props.setMood(4);
-                  props.updateFirestore();
-                }}>
+              <div className='circle mood4' onClick={()=>responseMessage(props, 4)}>
               </div>
               <p>REALLY GOOD</p>
             </div>
           </div>
 
-          <button className='clearDay' onClick={()=>{
+          {doesithavemood? <button className='clearDay' onClick={()=>{
             props.clearDay();
             props.updateFirestore();
-          }}>Clear Day</button>
+          }}> Clear Day </button>: ''}
 
         </div>
       </div>
@@ -107,8 +91,23 @@ const DayClicked = (props) => {
 
 
 // HELPER FUNCTIONS
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const closeWindow =() => {
   document.querySelector('.dayClicked').classList.add('hide');
+}
+
+const responseMessage = (props, moodNum) => {
+  props.setMood(moodNum);
+  props.updateFirestore();
+
+  // hide and show the pop up clear day response
+  const cleardayContainer = document.querySelector('.ClearDayResponse');
+  cleardayContainer.classList.add(`mood${moodNum}`);
+  cleardayContainer.classList.remove('hide');
+  setTimeout(()=>{
+    cleardayContainer.classList.remove(`mood${moodNum}`);
+    cleardayContainer.classList.add('hide');
+  }, 1000)
 }
 
 const tellMood = (mood) => {
@@ -158,6 +157,8 @@ const getMessage = (doesithavemood, isittoday, month, day, mood) => {
 }
 
 
+// MAP
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 const mapStateToProps = state => {
   return {
     clickedMonth: state.current.month,

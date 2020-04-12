@@ -28,7 +28,6 @@ export const clearDay = () => {
     const currentMonth = getState().current.month;
     const currentDay = getState().current.day;
     dispatch({ type: 'CLEAR_DAY', month:currentMonth, day:currentDay});
-    console.log(getState());
   }
 }
 export const setMood = (mood) => {
