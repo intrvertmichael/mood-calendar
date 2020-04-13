@@ -13,14 +13,14 @@ const ClearDayResponse = props => {
   // MOOD 4 _ GOOD
   const mood4messages = ['yellow message 1', 'yellow message 2', 'yellow message 3'];
 
-  const m1 = [
-    mood1messages[Math.floor(Math.random()*mood1messages.length)],
-    mood2messages[Math.floor(Math.random()*mood1messages.length)],
-    mood3messages[Math.floor(Math.random()*mood1messages.length)],
-    mood4messages[Math.floor(Math.random()*mood1messages.length)]
+  const m = [
+    mood1messages[Math.floor(Math.random() * mood1messages.length)],
+    mood2messages[Math.floor(Math.random() * mood2messages.length)],
+    mood3messages[Math.floor(Math.random() * mood3messages.length)],
+    mood4messages[Math.floor(Math.random() * mood4messages.length)]
   ];
 
-  const message = m1[mood-1];
+  const message = m[mood-1];
 
   return (
     <div className='ClearDayResponse hide' onClick={()=>document.querySelector('.ClearDayResponse').classList.add('hide')}>

@@ -3,10 +3,17 @@ import {connect} from 'react-redux';
 import {logOut} from '../_actions';
 
 const Header = (props) => {
+  let mood = props.total;
+  if(props.total === 1){ mood = 'Bad'}
+  else if(props.total === 2){ mood = 'Okay'}
+  else if(props.total === 3){ mood = 'Good'}
+  else if(props.total === 4){ mood = 'Really Good'}
+  const head = props.total ? `Your average mood is ${mood}` : `${props.name}'s Mood Calendar`;
+
   return(
     <div className='title'>
       <div>
-        <p>{props.name}'s Mood Calendar </p>
+        <p>{head}</p>
         <button className='logout-btn' onClick={props.logOut}> Log Out </button>
       </div>
       <div className='year'>
@@ -18,7 +25,8 @@ const Header = (props) => {
 
 const mapStateToProps = state =>{
   return {
-    name: state.firebase.auth.displayName
+    name: state.firebase.auth.displayName,
+    total: state.current.total,
   }
 }
 

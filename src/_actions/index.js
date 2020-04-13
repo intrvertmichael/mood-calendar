@@ -8,6 +8,9 @@ export const setCurrentMonth = (month) => {
 export const setCurrentDay = (day) => {
   return { type: 'SET_CURRENT_DAY', day: day};
 }
+export const setCurrentAvg = (total) => {
+  return { type: 'SET_CURRENT_AVG', total: total};
+}
 
 
 

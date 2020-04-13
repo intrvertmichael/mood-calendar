@@ -100,7 +100,7 @@ const responseMessage = (props, moodNum) => {
   props.setMood(moodNum);
   props.updateFirestore();
 
-  // hide and show the pop up clear day response
+  // show and after 1 second hide
   const cleardayContainer = document.querySelector('.ClearDayResponse');
   cleardayContainer.classList.add(`mood${moodNum}`);
   cleardayContainer.classList.remove('hide');

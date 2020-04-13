@@ -3,7 +3,8 @@
 const current = {
   year: 2020,
   month: null,
-  day: null
+  day: null,
+  total: null
 }
 
 const currentReducer = ( state=current, action ) => {
@@ -16,6 +17,9 @@ const currentReducer = ( state=current, action ) => {
 
     case 'SET_CURRENT_DAY':
       return { ...state, day:action.day};
+
+    case 'SET_CURRENT_AVG':
+      return { ...state, total:action.total};
 
     default:
       return state;
