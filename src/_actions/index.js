@@ -80,7 +80,7 @@ export const updateFirestore = () => {
       email: getState().firebase.auth.email,
       lastUpdateAt: new Date()
     }).then(()=>{
-      console.log('Firestore was updated');
+      // console.log('Firestore was updated');
     }).catch( err =>{
       console.log('Not able to update Firestore');
       console.log(err);

@@ -2,8 +2,8 @@
 
 :root {
   --border: rgb(240, 240, 240);
-  --page-background: #d1c6b6;
-  --page-font: black;
+  --page-background: #f8f8f8;
+  --page-font: #181f3a;
   --calendar-background: white;
   --calendar-font: gray;
 }
