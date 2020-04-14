@@ -103,10 +103,6 @@ RESPONSIVE
   .container {
     width: 95%;
     margin: 10px auto;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
   }
 
   .intro {
