@@ -18,3 +18,6 @@ const Intro = () => {
 }
 
 export default Intro;
+
+// to uodate gh page run this command:
+// npm run deploy
