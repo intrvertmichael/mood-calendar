@@ -9,7 +9,7 @@ const Intro = () => {
   return(
     <div className='intro'>
       <h1>Mood Calendar</h1>
-      <p>Keep track of your mood. Some kind of description goes here.</p>
+      <p>Keep track of your mood.</p>
       <div className='gbutton'>
         <GoogleButton type="dark" onClick={()=>dispatch(logIn())} />
       </div>
