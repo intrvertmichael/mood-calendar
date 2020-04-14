@@ -15,7 +15,7 @@ import '../style/Moods.css';
 import {useEffect} from 'react';
 import {connect} from 'react-redux';
 
-import {setCurrentAvg} from '../_actions';
+// import {setCurrentAvg} from '../_actions';
 import {setCurrentMonth} from '../_actions';
 import {addMonth} from '../_actions';
 import {syncReduxFirestore} from '../_actions';
@@ -65,6 +65,28 @@ const Calendar = props => {
   const blankMonth = { num:null, name:null, length:null, starts:null, days:[] };
   const month = props.calendarYear[`month${m}`]? props.calendarYear[`month${m}`]: blankMonth;
 
+
+  // average mood
+  // if(props.calendarYear[`month${m}`]){
+  //   let total = 0;
+  //   const allDays = props.calendarYear[`month${m}`].days;
+  //   const allDaysArray = Object.entries(allDays);
+  //   console.log(allDaysArray.length);
+  //   if(allDaysArray.length>1){
+  //     const allDaysArrayLength = allDaysArray.length;
+  //
+  //     for(let m=0 ; m< allDaysArrayLength ; m++ ){
+  //       total += allDaysArray[m][1].mood;
+  //     }
+  //
+  //     total = Math.round(total/allDaysArrayLength);
+  //
+  //     if(props.total !== total){
+  //       props.setCurrentAvg(total);
+  //     }
+  //   }
+  // }
+
   useFirestoreConnect(`userCalendars`);
   useEffect( () => {
     let firestoreObj = null;
@@ -76,26 +98,12 @@ const Calendar = props => {
       }
     }
 
-    // average mood
-    if(firestoreObj !== null){
-      let total = 0;
-      const allDays = firestoreObj.year2020[`month${m}`].days;
-      const allDaysArray = Object.entries(allDays);
-      const allDaysArrayLength = allDaysArray.length;
+    if(firestoreObj){
+      const fireCalEqual =  _.isEqual(firestoreObj.year2020, props.calendarYear);
 
-      for(let m=0 ; m< allDaysArrayLength ; m++ ){
-        total += allDaysArray[m][1].mood;
+      if(firestoreObj && !fireCalEqual ) {
+        props.syncReduxFirestore(firestoreObj);
       }
-
-      total = Math.round(total/allDaysArrayLength);
-
-      if(props.total !== total){
-        props.setCurrentAvg(total);
-      }
-    }
-
-    if(firestoreObj && !_.isEqual(firestoreObj, props.calendarYear) ) {
-      props.syncReduxFirestore(firestoreObj);
     }
   });
 
@@ -139,7 +147,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setCurrentAvg: total => dispatch(setCurrentAvg(total)),
+    // setCurrentAvg: total => dispatch(setCurrentAvg(total)),
     addMonth: (monthName, monthObj) => dispatch( addMonth(monthName, monthObj) ),
     setCurrentMonth: month => dispatch(setCurrentMonth(month)),
     syncReduxFirestore: obj => dispatch(syncReduxFirestore(obj))

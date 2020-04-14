@@ -1,15 +1,11 @@
 import _ from 'lodash';
 
 // LOCAL ACTIONS
-
 export const setCurrentMonth = (month) => {
   return { type: 'SET_CURRENT_MONTH', month: month} ;
 }
 export const setCurrentDay = (day) => {
   return { type: 'SET_CURRENT_DAY', day: day};
-}
-export const setCurrentAvg = (total) => {
-  return { type: 'SET_CURRENT_AVG', total: total};
 }
 
 
@@ -30,14 +26,20 @@ export const clearDay = () => {
   return (dispatch, getState) => {
     const currentMonth = getState().current.month;
     const currentDay = getState().current.day;
+
     dispatch({ type: 'CLEAR_DAY', month:currentMonth, day:currentDay});
+    const allDays = getState().calendar.year2020;
+    dispatch({ type: 'SET_CURRENT_AVG', days:allDays[`month${currentMonth}`].days});
   }
 }
 export const setMood = (mood) => {
   return (dispatch, getState) => {
     const currentMonth = getState().current.month;
     const currentDay = getState().current.day;
+
     dispatch({ type: 'SET_MOOD', month:currentMonth, day:currentDay, mood:mood });
+    const allDays = getState().calendar.year2020;
+    dispatch({ type: 'SET_CURRENT_AVG', days:allDays[`month${currentMonth}`].days});
   }
 }
 export const setMessage = (message) => {
@@ -55,6 +57,7 @@ export const setMessage = (message) => {
 
 // when app first starts.
 export const syncReduxFirestore = (firestoreCalendars) => {
+  console.log('inside sync');
   const fireObj = firestoreCalendars.year2020;
   return (dispatch, getState) => {
     const localObj = getState().calendar.year2020;
@@ -70,6 +73,7 @@ export const syncReduxFirestore = (firestoreCalendars) => {
 
 // when a mood is clicked
 export const updateFirestore = () => {
+
   return (dispatch, getState, {getFirestore}) => {
     const firestore = getFirestore();
     const id = getState().firebase.auth.uid;
