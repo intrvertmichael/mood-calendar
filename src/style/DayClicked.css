@@ -121,7 +121,7 @@
 }
 
 .clearDay {
-  margin: 10px auto 0px auto;
+  margin: 10px auto;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -186,24 +186,32 @@
     margin: 10px 0px;
     width: 90%;
   }
+  .info-window {
+    margin: 0px;
+  }
   .info-window p {
-    padding: 10px 20px;
+    padding: 0px 20px;
   }
 
   .big-circle {
     width: 200px;
     height: 200px;
     margin: 0px auto 30px auto;
+    font-size: 14px;
   }
   .rating {
     padding: 10px 0px;
+  }
+
+  .rating-circles {
+    height: 110px;
   }
   .rating p {
     padding-bottom: 0px;
   }
 
   .circle-container {
-    height: 80px;
+    height: 100px;
   }
   .circle-container p {
     margin: 30px 0px;
