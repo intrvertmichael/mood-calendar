@@ -103,6 +103,7 @@ const responseMessage = (props, moodNum) => {
   const cleardayContainer = document.querySelector('.ClearDayResponse');
   cleardayContainer.classList.add(`mood${moodNum}`);
   cleardayContainer.classList.remove('hide');
+  
   // setTimeout(()=>{
   //   cleardayContainer.classList.remove(`mood${moodNum}`);
   //   cleardayContainer.classList.add('hide');

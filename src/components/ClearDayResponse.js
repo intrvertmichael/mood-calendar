@@ -112,9 +112,9 @@ const ClearDayResponse = props => {
   const author = m[mood-1]? m[mood-1].author: '';
 
   return (
-    <div className='ClearDayResponse hide' onClick={closeResponseWindow}>
+    <div className='ClearDayResponse hide' onClick={()=>closeResponseWindow(mood)}>
       <div className='ClearDayResponseBox'>
-        <p className='closeResponse' onClick={closeResponseWindow}>X</p>
+        <p className='closeResponse' onClick={()=>closeResponseWindow(mood)}>X</p>
         <p className='quote'>{quote}</p>
         <p className='author'>- {author}</p>
       </div>
@@ -122,8 +122,9 @@ const ClearDayResponse = props => {
   );
 }
 
-const closeResponseWindow = () =>{
+const closeResponseWindow = mood =>{
   document.querySelector('.ClearDayResponse').classList.add('hide')
+  document.querySelector('.ClearDayResponse').classList.remove(`mood${mood}`);
 }
 
 const mapStateToProps = state => {
