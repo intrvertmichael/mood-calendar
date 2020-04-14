@@ -8,7 +8,7 @@ const Header = (props) => {
   else if(props.total === 2){ mood = 'Okay'}
   else if(props.total === 3){ mood = 'Good'}
   else if(props.total === 4){ mood = 'Really Good'}
-  const head = props.total ? `Your average mood is ${mood}` : `${props.name}'s Mood Calendar`;
+  const head = props.total ? `You've been mostly ${mood} this month` : `${props.name}'s Mood Calendar`;
 
   return(
     <div className='title'>

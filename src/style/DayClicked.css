@@ -131,6 +131,32 @@
   background: var(--border);
 }
 
+.ClearDayResponseBox{
+  width: 500px;
+  padding: 0px 30px;
+  box-sizing: border-box;
+}
+
+.closeResponse {
+  text-align: right;
+  opacity: .5;
+  margin-bottom: 50px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.quote {
+  font-size: 20px;
+  line-height: 40px;
+  padding: 30px;
+}
+
+.author {
+  font-size: 16px;
+  margin-top: 50px;
+  padding: 0px 30px;
+}
+
 @media only screen and ( min-width: 700px ) {
   .dayInfo {
     width: 600px;
@@ -181,5 +207,8 @@
   }
   .circle-container p {
     margin: 30px 0px;
+  }
+  .ClearDayResponseBox{
+    width: 90%;
   }
 }

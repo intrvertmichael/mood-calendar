@@ -6,8 +6,6 @@ import Intro from './Intro';
 
 const App = (props) => {
   const {auth} = props;
-  const logInMessage = auth.uid? `Logged In. UserId: ${auth.uid}`: 'The User is not logged in.';
-  console.log(logInMessage);
 
   return(
     <div className='container'>
