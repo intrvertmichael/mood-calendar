@@ -27,7 +27,7 @@ const DayClicked = (props) => {
     doesithavemood = true;
     mood = tellMood(month.days[`day${clickedDay}`].mood);
     bigfacetags = `big-circle mood${month.days[`day${clickedDay}`].mood}`;
-    message = month.days[`day${clickedDay}`].message?month.days[`day${clickedDay}`].message:'Why? ';
+    message = month.days[`day${clickedDay}`].message?month.days[`day${clickedDay}`].message:'Click and tell me why';
   }
 
 
@@ -103,11 +103,6 @@ const responseMessage = (props, moodNum) => {
   const cleardayContainer = document.querySelector('.ClearDayResponse');
   cleardayContainer.classList.add(`mood${moodNum}`);
   cleardayContainer.classList.remove('hide');
-
-  // setTimeout(()=>{
-  //   cleardayContainer.classList.remove(`mood${moodNum}`);
-  //   cleardayContainer.classList.add('hide');
-  // }, 10000)
 }
 
 const tellMood = (mood) => {
@@ -137,16 +132,16 @@ const getMessage = (doesithavemood, isittoday, month, day, mood) => {
     ratingMessage = 'If not, how were you really feeling?';
   }
   else if(!doesithavemood && !isittoday) {
-    infoMessage = `You don't have a mood for ${month} ${day}` ;
-    ratingMessage = `How were you feeling? `;
+    infoMessage = `How were you feeling on ${month} ${day}?` ;
+    ratingMessage = `Choose one of the moods below`;
   }
   else if(doesithavemood && isittoday){
     infoMessage = `Seems like you're feeling ${mood} today` ;
     ratingMessage = 'Did you change your mind ?';
   }
   else if(!doesithavemood && isittoday){
-    infoMessage = `Seems like you don't have a mood for today` ;
-    ratingMessage = 'Would you like to add one ?';
+    infoMessage = `How are you feeling today?` ;
+    ratingMessage = 'Choose one of the moods below';
   }
   else {
     infoMessage = '';

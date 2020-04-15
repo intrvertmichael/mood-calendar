@@ -79,6 +79,6 @@ RESPONSIVE
 /* IPHONE */
 @media only screen and ( max-width: 500px) {
   .day, .notADay {
-    height: 70px;
+    height: 60px;
   }
 }

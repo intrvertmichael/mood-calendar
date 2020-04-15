@@ -34,13 +34,14 @@
 .info-window p {
   padding: 0px;
   font-size: 16px;
+  margin-bottom: 30px;
 }
 
 .rating {
   width: 80%;
   margin: auto;
   border-top:2px solid white;
-  padding: 30px 0px;
+  padding: 30px 0px 0px 0px;
   display: flex;
   flex-direction: column;
 }
@@ -48,6 +49,7 @@
 .rating p {
   padding-bottom: 20px;
   text-align: center;
+  margin: 0px;
 }
 
 .rating-circles {
@@ -196,7 +198,7 @@
   .big-circle {
     width: 200px;
     height: 200px;
-    margin: 0px auto 30px auto;
+    margin: -15px auto 10px auto;
     font-size: 14px;
   }
   .rating {
@@ -204,17 +206,18 @@
   }
 
   .rating-circles {
-    height: 130px;
+    height: 120px;
   }
+
   .rating p {
-    padding-bottom: 0px;
+    padding: 20px  0px;
   }
 
   .circle-container {
-    height: 130px;
+    height: 120px;
   }
   .circle-container p {
-    margin: 30px 0px;
+    margin: 0px;
     font-size: 14px;
   }
   .ClearDayResponseBox{
