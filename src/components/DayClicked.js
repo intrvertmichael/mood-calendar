@@ -68,13 +68,13 @@ const DayClicked = (props) => {
             <div className='circle-container'>
               <div className='circle mood3' onClick={()=>responseMessage(props, 3)}>
               </div>
-              <p>GOOD</p>
+              <p>Good</p>
             </div>
 
             <div className='circle-container'>
               <div className='circle mood4' onClick={()=>responseMessage(props, 4)}>
               </div>
-              <p>REALLY GOOD</p>
+              <p>Really Good</p>
             </div>
           </div>
 
@@ -103,7 +103,7 @@ const responseMessage = (props, moodNum) => {
   const cleardayContainer = document.querySelector('.ClearDayResponse');
   cleardayContainer.classList.add(`mood${moodNum}`);
   cleardayContainer.classList.remove('hide');
-  
+
   // setTimeout(()=>{
   //   cleardayContainer.classList.remove(`mood${moodNum}`);
   //   cleardayContainer.classList.add('hide');

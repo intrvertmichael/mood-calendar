@@ -54,31 +54,31 @@ RESPONSIVE
 
 @media only screen and ( min-width: 1500px ) {
   .day, .notADay {
-    height: 150px;
+    height: 115px;
   }
 }
 
 @media only screen and ( 1250px <= width < 1500px) {
   .day, .notADay {
-    height: 125px;
+    height: 110px;
   }
 }
 
 @media only screen and ( 1000px <= width < 1250px) {
   .day, .notADay {
-    height: 100px;
+    height: 105px;
   }
 }
 
 @media only screen and ( 500px <= width <= 1000px) {
   .day, .notADay {
-    height: 80px;
+    height: 100px;
   }
 }
 
 /* IPHONE */
 @media only screen and ( max-width: 500px) {
   .day, .notADay {
-    height: 60px;
+    height: 70px;
   }
 }
