@@ -15,12 +15,14 @@ html, body {
   font-family: Jetbrains Mono, helvetica, arial, sans-serif;
   background: var(--page-background);
   color: var(--page-font);
+  height: 100%;
 }
 
 body {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* border: 1px solid red; */
 }
 
 #root {

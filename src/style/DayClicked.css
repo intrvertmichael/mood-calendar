@@ -224,3 +224,17 @@
     width: 100%;
   }
 }
+
+@media only screen and (max-width: 500px) and (max-height: 700px){
+  .month h2 {
+      padding: 0px;
+  }
+  .dayInfo p {
+    font-size: 14px;
+  }
+  .big-circle {
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+  }
+}
