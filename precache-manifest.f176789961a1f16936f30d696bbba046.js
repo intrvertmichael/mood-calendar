@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6ed5a8abbc135940b791b65f02e508b8",
+    "revision": "a726fb09e54599ad46a26479a161b684",
     "url": "/mood-calendar/index.html"
   },
   {
-    "revision": "462ec85f86347a4e8e9d",
-    "url": "/mood-calendar/static/css/main.296bbeca.chunk.css"
+    "revision": "bc84cb372560487053b1",
+    "url": "/mood-calendar/static/css/main.41ab1907.chunk.css"
   },
   {
     "revision": "c53942c2debb60c15188",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mood-calendar/static/js/2.f482d693.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "462ec85f86347a4e8e9d",
+    "revision": "bc84cb372560487053b1",
     "url": "/mood-calendar/static/js/main.901bfc06.chunk.js"
   },
   {
