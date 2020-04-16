@@ -19,7 +19,6 @@ const currentReducer = ( state=current, action ) => {
       return { ...state, day:action.day};
 
     case 'SET_CURRENT_AVG':
-      console.log('inside set current avg');
       let localTotal = 0;
       const allDays = action.days;
       const allDaysArray = Object.entries(allDays);

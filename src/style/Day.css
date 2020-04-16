@@ -25,7 +25,7 @@
 }
 
 .day:hover {
-  background: var(--border);
+  /* background: var(--border); */
   cursor: pointer;
 }
 

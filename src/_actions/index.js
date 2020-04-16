@@ -57,7 +57,6 @@ export const setMessage = (message) => {
 
 // when app first starts.
 export const syncReduxFirestore = (firestoreCalendars) => {
-  console.log('inside sync');
   const fireObj = firestoreCalendars.year2020;
   return (dispatch, getState) => {
     const localObj = getState().calendar.year2020;
