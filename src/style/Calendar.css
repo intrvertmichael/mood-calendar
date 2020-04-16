@@ -38,6 +38,7 @@
 .month {
   width: 100%;
   text-align: center;
+  transition: padding 0.5s ease;
 }
 
 .month h2 {
@@ -105,5 +106,11 @@ select {
   }
   .month h2 {
     padding: 20px;
+  }
+}
+
+@media (orientation: landscape) {
+  .month h2 {
+    padding: 10px;
   }
 }

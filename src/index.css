@@ -110,3 +110,9 @@ RESPONSIVE
     width: 95%;
   }
 }
+
+@media (orientation: landscape) {
+  html, body {
+    height:auto;
+  }
+}
